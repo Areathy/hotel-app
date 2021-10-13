@@ -4,13 +4,14 @@ import { MatInputModule } from "@angular/material/input";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatIconModule } from "@angular/material/icon";
 import { MatMenuModule } from "@angular/material/menu";
+import { MatExpansionModule } from "@angular/material/expansion";
 
-let components = [
-  MatButtonModule, MatInputModule, MatToolbarModule, MatIconModule, MatMenuModule
+let materialModules = [
+  MatButtonModule, MatInputModule, MatToolbarModule, MatIconModule, MatMenuModule, MatExpansionModule
 ];
 
 @NgModule({
-  imports: [components],
-  exports: [components]
+  imports: [materialModules],
+  exports: [materialModules]
 })
 export class MaterialModule { }

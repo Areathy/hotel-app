@@ -66,3 +66,25 @@
   </mat-menu>
   <!-- menu ends -->
 </mat-toolbar>
+
+<mat-expansion-panel [expanded]="showStatistics">
+  <div class="mt" fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="20px">
+    <div class="font-weight-bold">Bookings Summary:</div>
+
+    <div>
+      <div>This Week:</div>
+      <div class="font-weight-bold">108 Bookings</div>
+    </div>
+
+    <div>
+      <div>This Month:</div>
+      <div class="font-weight-bold">595 Bookings</div>
+    </div>
+
+    <div>
+      <div>This Year:</div>
+      <div class="font-weight-bold">5894 Bookings</div>
+    </div>
+
+  </div>
+</mat-expansion-panel>
