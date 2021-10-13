@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center" class="nav"> 
 
   <!-- left box of toolbar starts -->
   <div fxLayout="row" fxLayoutAlign="space-between center">
@@ -24,16 +24,45 @@
 
   <!-- right box of toolbar starts -->
   <div>
-    <button type="button" mat-stroked-button class="mr" fxHide.lt-md="true">
-      <mat-icon>account_circle</mat-icon> User 
+    <button type="button" mat-stroked-button class="mr" fxHide.lt-md="true" [matMenuTriggerFor]="user">
+      <mat-icon>account_circle</mat-icon> User
     </button>
-    <button type="button" mat-icon-button>
+    <button type="button" mat-icon-button [matMenuTriggerFor]="notifications">
       <mat-icon>notifications</mat-icon>
     </button>
-    <button type="button" mat-icon-button>
+    <button type="button" mat-icon-button [matMenuTriggerFor]="topmenu">
       <mat-icon>more_vert</mat-icon>
     </button>
 
   </div>
   <!-- right box of toolbar ends -->
+
+  <!-- menu starts -->
+  <mat-menu #topmenu="matMenu">
+    <a [routerLink]="[ '/dashboard' ]" mat-menu-item>Dashboard</a>
+    <button mat-menu-item [matMenuTriggerFor]="bookings">Bookings</button>
+    <button mat-menu-item [matMenuTriggerFor]="user">User</button>
+    <button mat-menu-item>Statistics</button>
+  </mat-menu>
+
+  <mat-menu #bookings="matMenu">
+    <a [routerLink]="[ '/booking' ]" mat-menu-item>New Booking</a>
+    <a [routerLink]="[ '/bookings-list' ]" mat-menu-item>Bookings List</a>
+  </mat-menu>
+
+  <mat-menu #user="matMenu">
+    <button mat-menu-item>Profile</button>
+    <button mat-menu-item>Change Password</button>
+    <button mat-menu-item>Logout</button>
+  </mat-menu>
+
+  <mat-menu #notifications="matMenu">
+    <button mat-menu-item>
+      <mat-icon>email</mat-icon> Email from John
+    </button>
+    <button mat-menu-item>
+      <mat-icon>receipt_long</mat-icon> Send Bills to Customers
+    </button>
+  </mat-menu>
+  <!-- menu ends -->
 </mat-toolbar>
