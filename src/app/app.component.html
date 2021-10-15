@@ -27,8 +27,8 @@
     <button type="button" mat-stroked-button class="mr" fxHide.lt-md="true" [matMenuTriggerFor]="user">
       <mat-icon>account_circle</mat-icon> User
     </button>
-    <button type="button" mat-icon-button [matMenuTriggerFor]="notifications">
-      <mat-icon>notifications</mat-icon>
+    <button type="button" mat-icon-button [matMenuTriggerFor]="notifications" class="ml mr">
+      <mat-icon matBadge="2" matBadgeColor="accent" >notifications</mat-icon>
     </button>
     <button type="button" mat-icon-button [matMenuTriggerFor]="topmenu">
       <mat-icon>more_vert</mat-icon>
@@ -60,6 +60,7 @@
     <button mat-menu-item>
       <mat-icon>email</mat-icon> Email from John
     </button>
+    <mat-divider></mat-divider>
     <button mat-menu-item>
       <mat-icon>receipt_long</mat-icon> Send Bills to Customers
     </button>
