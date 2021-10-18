@@ -357,6 +357,12 @@ th.mat-header-cell:first-of-type,td.mat-cell:first-of-type,td.mat-footer-cell:fi
   background-color: #197da5;
 }
 
+.yellow-back
+{
+  background-color: #ffff00;
+  color: #000000 !important;
+}
+
 .notification-panel
 {
   background-color: #e8e7e7;
