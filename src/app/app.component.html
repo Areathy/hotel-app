@@ -76,36 +76,41 @@
   <div class="mt" fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="20px">
     <div class="font-weight-bold">Bookings Summary:</div>
 
-    <div matTooltip="Total Bookings in this week">
+    <div matTooltip="Total Bookings in this week" matRipple class="p-10 hand-icon">
       <div>This Week:</div>
       <div class="font-weight-bold">108 Bookings</div>
     </div>
 
-    <div matTooltip="Total Bookings in this month">
+    <div matTooltip="Total Bookings in this month" matRipple class="p-10 hand-icon">
       <div>This Month:</div>
       <div class="font-weight-bold">595 Bookings</div>
     </div>
 
-    <div matTooltip="Total Bookings in this year">
+    <div matTooltip="Total Bookings in this year" matRipple class="p-10 hand-icon">
       <div>This Year:</div>
       <div class="font-weight-bold">5894 Bookings</div>
     </div>
 
   </div>
-</mat-expansion-panel> 
+</mat-expansion-panel>
 
 <mat-drawer-container class="drawer-container">
 
-  <mat-drawer #drawer class="drawer" mode="side" opened="true">
+  <mat-drawer #drawer class="drawer" mode="side" opened="false">
     <div class="user-logo">
       <mat-icon class="user-icon">person_outline</mat-icon>
       <div class="v-align-middle">User</div>
     </div>
     <mat-divider></mat-divider>
+    <mat-nav-list class="sidebar-navlist">
+      <a [routerLink]="[ '/dashboard' ]" mat-list-item routerLinkActive="link-active">Dashboard</a>
+      <a [routerLink]="[ '/bookings-list' ]" mat-list-item routerLinkActive="link-active">Bookings List</a>
+      <a [routerLink]="[ '/booking' ]" mat-list-item routerLinkActive="link-active">New Booking</a>
+    </mat-nav-list>
   </mat-drawer>
 
   <div class="main">
     <router-outlet></router-outlet>
   </div>
 
-</mat-drawer-container>
+</mat-drawer-container> 
