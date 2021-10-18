@@ -11,10 +11,11 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatListModule } from "@angular/material/list";
 import { MatRippleModule } from "@angular/material/core";
+import { MatGridListModule } from "@angular/material/grid-list";
 
 let materialModules = [
   MatButtonModule, MatInputModule, MatToolbarModule, MatIconModule, MatMenuModule, MatExpansionModule, MatBadgeModule,
-  MatDividerModule, MatTooltipModule, MatSidenavModule, MatListModule, MatRippleModule 
+  MatDividerModule, MatTooltipModule, MatSidenavModule, MatListModule, MatRippleModule, MatGridListModule
 ];
 
 @NgModule({
