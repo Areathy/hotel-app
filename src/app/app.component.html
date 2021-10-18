@@ -2,7 +2,7 @@
 
   <!-- left box of toolbar starts -->
   <div fxLayout="row" fxLayoutAlign="space-between center">
-    <button mat-icon-button matTooltip="Sidebar">
+    <button mat-icon-button matTooltip="Sidebar" (click)="drawer.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
     <a mat-icon-button matTooltip="Dashboard" [routerLink]="[ '/dashboard' ]">
@@ -93,3 +93,19 @@
 
   </div>
 </mat-expansion-panel> 
+
+<mat-drawer-container class="drawer-container">
+
+  <mat-drawer #drawer class="drawer" mode="side" opened="true">
+    <div class="user-logo">
+      <mat-icon class="user-icon">person_outline</mat-icon>
+      <div class="v-align-middle">User</div>
+    </div>
+    <mat-divider></mat-divider>
+  </mat-drawer>
+
+  <div class="main">
+    <router-outlet></router-outlet>
+  </div>
+
+</mat-drawer-container>

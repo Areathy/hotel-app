@@ -8,10 +8,11 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { MatBadgeModule } from "@angular/material/badge";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatSidenavModule } from "@angular/material/sidenav";
 
 let materialModules = [
   MatButtonModule, MatInputModule, MatToolbarModule, MatIconModule, MatMenuModule,
-  MatExpansionModule, MatBadgeModule, MatDividerModule, MatTooltipModule
+  MatExpansionModule, MatBadgeModule, MatDividerModule, MatTooltipModule, MatSidenavModule
 ];
 
 @NgModule({
