@@ -1,4 +1,4 @@
-<mat-grid-list cols="4" gutterSize="20px" rowHeight="100px" class="dashboard-grid-list">
+<mat-grid-list [cols]="dashboardGridCols" gutterSize="20px" rowHeight="100px" class="dashboard-grid-list">
 
   <!-- tile 1 starts -->
   <mat-grid-tile fxLayout="row" class="dashboard-tile dashboard-tile-1 colorful-tile" fxLayoutAlign="start stretch" matRipple matTooltip="Total Bookings all time">
@@ -55,6 +55,6 @@
   </mat-grid-tile>
   <!-- tile 4 ends -->
 
-  <mat-grid-tile style="background-color:#2f6597; color: #ffffff" colspan="2" rowspan="3">five</mat-grid-tile>
-  <mat-grid-tile style="background-color:#2f6597; color: #ffffff" colspan="2" rowspan="3">six</mat-grid-tile>
+  <mat-grid-tile style="background-color:#2f6597; color: #ffffff" [colspan]="cardColspan" rowspan="3">five</mat-grid-tile>
+  <mat-grid-tile style="background-color:#2f6597; color: #ffffff" [colspan]="cardColspan" rowspan="3">six</mat-grid-tile>
 </mat-grid-list>
