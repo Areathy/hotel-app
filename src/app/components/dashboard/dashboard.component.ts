@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
+import { Booking } from "../../models/booking";
+import { BookingsService } from "../../services/bookings.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -11,8 +13,9 @@ export class DashboardComponent implements OnInit {
   //properties
   dashboardGridCols: number = 4;
   cardColspan: number = 2;
+  bookings: Booking[] = [];
 
-  constructor(private mediaObserver: MediaObserver) { }
+  constructor(private mediaObserver: MediaObserver, private bookingsService: BookingsService) { }
 
   ngOnInit(): void {
 
@@ -31,6 +34,16 @@ export class DashboardComponent implements OnInit {
         this.cardColspan = 2;
       }
     });
+
+    //bookings
+    this.bookingsService.getBookings().subscribe(
+      (response: any) => {
+        this.bookings = response;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
 
   }
 
