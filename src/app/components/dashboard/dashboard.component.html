@@ -131,7 +131,10 @@
       </div>
     </mat-grid-tile>
     <!-- tile 5 ends -->
-  
-    <mat-grid-tile style="background-color:#2f6597; color: #ffffff" [colspan]="cardColspan" rowspan="4">six</mat-grid-tile>
+
+    <mat-grid-tile class="dashboard-tile dashboard-tile-6" [colspan]="cardColspan" rowspan="4">
+      <div [chart]="columnChart"></div>
+    </mat-grid-tile>
+    
   </mat-grid-list>
   

@@ -9,6 +9,8 @@ import { MaterialModule } from './modules/material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { ChartModule } from "angular-highcharts";
+
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { BookingComponent } from './components/booking/booking.component';
 import { BookingsListComponent } from './components/bookings-list/bookings-list.component';
@@ -28,7 +30,8 @@ import { BookingsListComponent } from './components/bookings-list/bookings-list.
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]

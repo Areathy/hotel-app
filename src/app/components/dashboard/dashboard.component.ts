@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { Booking } from "../../models/booking";
 import { BookingsService } from "../../services/bookings.service";
+import { Chart } from "angular-highcharts";
+import { columnChartOptions } from "../../charts/column-chart";
 
 @Component({
   selector: 'app-dashboard',
@@ -14,6 +16,7 @@ export class DashboardComponent implements OnInit {
   dashboardGridCols: number = 4;
   cardColspan: number = 2;
   bookings: Booking[] = [];
+  columnChart: Chart = new Chart(columnChartOptions);
 
   constructor(private mediaObserver: MediaObserver, private bookingsService: BookingsService) { }
 
