@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
   cardColspan: number = 2;
   bookings: Booking[] = [];
   columnChart: Chart = new Chart(columnChartOptions);
+  bookingsLoadingStarted: boolean = false;
 
   constructor(private mediaObserver: MediaObserver, private bookingsService: BookingsService) { }
 
@@ -39,12 +40,15 @@ export class DashboardComponent implements OnInit {
     });
 
     //bookings
+    this.bookingsLoadingStarted = true;
     this.bookingsService.getBookings().subscribe(
       (response: any) => {
         this.bookings = response;
+        this.bookingsLoadingStarted = false;
       },
       (error) => {
         console.log(error);
+        this.bookingsLoadingStarted = false;
       }
     );
 

@@ -67,6 +67,8 @@
           </div>
         </div>
         <!-- first box ends -->
+
+        <mat-progress-bar value="60" mode="indeterminate" *ngIf="bookingsLoadingStarted"></mat-progress-bar>
   
         <!-- second box starts -->
         <div fxFlex="1 1 100%" class="p-5">
@@ -135,6 +137,6 @@
     <mat-grid-tile class="dashboard-tile dashboard-tile-6" [colspan]="cardColspan" rowspan="4">
       <div [chart]="columnChart"></div>
     </mat-grid-tile>
-    
+
   </mat-grid-list>
   
