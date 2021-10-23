@@ -14,11 +14,12 @@ import { MatRippleModule } from "@angular/material/core";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatStepperModule } from "@angular/material/stepper";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
 
 let materialModules = [
   MatButtonModule, MatInputModule, MatToolbarModule, MatIconModule, MatMenuModule, MatExpansionModule, MatBadgeModule,
   MatDividerModule, MatTooltipModule, MatSidenavModule, MatListModule, MatRippleModule, MatGridListModule, MatProgressBarModule,
-  MatStepperModule
+  MatStepperModule, MatAutocompleteModule
 ];
 
 @NgModule({

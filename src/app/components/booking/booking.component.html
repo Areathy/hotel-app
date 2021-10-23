@@ -23,6 +23,32 @@
                     </div>
                 </h2>
 
+                <div fxLayout="row" fxLayoutGap.gt-sm="40px" fxLayout.lt-md="column">
+                    <!-- box 1 starts -->
+                    <div fxFlex="1 1 calc(50% - 20px)" fxFlex.lt-md="1 1 100%">
+
+                        <!-- auto complete -->
+                        <mat-form-field class="w-100" color="primary">
+                            <mat-label>Where</mat-label>
+                            <input type="text" matInput formControlName="city" [matAutocomplete]="citiesAutocomplete" />
+                            <mat-autocomplete #citiesAutocomplete="matAutocomplete">
+                                <mat-option *ngIf="isCitiesLoading">Loading...</mat-option>
+                                <mat-option *ngFor="let city of cities" [value]="city.cityName">{{city.cityName}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+
+                        
+                    </div>
+                    <!-- box 1 ends -->
+
+                    <!-- box 2 starts -->
+                    <div fxFlex="1 1 calc(50% - 20px)" fxFlex.lt-md="1 1 100%">
+                        
+                    </div>
+                    <!-- box 2 ends -->
+                </div>
+
             </div>
         </form>
     </mat-step>
