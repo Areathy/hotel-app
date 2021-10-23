@@ -8,7 +8,25 @@
 </div>
 
 <mat-horizontal-stepper>
-    <mat-step label="Search for a hotel">one</mat-step>
+
+    <mat-step label="Search for a hotel" stepControlName="searchHotel">
+        <form [formGroup]="formGroup">
+            <div class="form-container mb mt" formGroupName="searchHotel">
+
+                <h2 class="section-header" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="space-between stretch">
+                    <div fxFlex="1 1 40%" fxFlex="1 1 100%">Search for a hotel</div>
+                    <div fxFlex="1 1 60%" fxFlex="1 1 100%" [ngClass.gt-xs]="{ 'text-right': true}">
+                        <button mat-flat-button color="primary">
+                            <span>Search Hotels</span>
+                            <mat-icon>chevron_right</mat-icon>
+                        </button>
+                    </div>
+                </h2>
+
+            </div>
+        </form>
+    </mat-step>
+
     <mat-step label="Choose a hotel">two</mat-step>
     <mat-step label="Choose a Room">three</mat-step>
     <mat-step label="Personal Information">four</mat-step>
