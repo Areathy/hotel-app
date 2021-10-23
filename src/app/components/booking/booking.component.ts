@@ -17,7 +17,12 @@ export class BookingComponent implements OnInit {
   cities: City[] = [];
   isCitiesLoading: boolean = false;
 
-  constructor(private citiesService: CitiesService) { 
+  minAdults: number = 1;
+  maxAdults: number = 2;
+  minChildren: number = 0;
+  maxChildren: number = 2;
+
+  constructor(private citiesService: CitiesService) {
     //formgroup
     this.formGroup = new FormGroup({
       searchHotel: new FormGroup({
@@ -30,7 +35,7 @@ export class BookingComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     //cities (autocomplete)
     this.getFormControl("searchHotel.city").valueChanges
       .pipe(
@@ -45,7 +50,7 @@ export class BookingComponent implements OnInit {
 
         //switchMap: to make http request
         switchMap(value => this.citiesService.getCities(value))
-      ) 
+      )
       .subscribe(
         (response: City[]) => {
           this.cities = response;
@@ -59,9 +64,66 @@ export class BookingComponent implements OnInit {
       );
   }
 
+  //increase adults
+  increaseAdults() {
+    if (this.formGroup.value.searchHotel.adults < this.maxAdults) {
+      this.getFormControl("searchHotel").patchValue({
+        adults: this.formGroup.value.searchHotel.adults + 1
+      });
+    }
+  }
+
+  //decrease adults
+  decreaseAdults() {
+    if (this.formGroup.value.searchHotel.adults > this.minAdults) {
+      this.getFormControl("searchHotel").patchValue({
+        adults: this.formGroup.value.searchHotel.adults - 1
+      });
+    }
+  }
+
+  //increase children
+  increaseChildren() {
+    if (this.formGroup.value.searchHotel.children < this.maxChildren) {
+      this.getFormControl("searchHotel").patchValue({
+        children: this.formGroup.value.searchHotel.children + 1
+      });
+    }
+  }
+
+  //decrease children
+  decreaseChildren() {
+    if (this.formGroup.value.searchHotel.children > this.minChildren) {
+      this.getFormControl("searchHotel").patchValue({
+        children: this.formGroup.value.searchHotel.children - 1
+      });
+    }
+  }
+
   //returns the form control object based on the form control name
   getFormControl(controlName: string): FormControl {
     return this.formGroup.get(controlName) as FormControl;
   }
+
+  //returns the error message based on the given control name and errorType
+  getErrorMessage(controlName: string, errorType: string): string {
+    let errorMessage: string = "";
+    switch (controlName) {
+      case "city": 
+        if (errorType == "required") errorMessage = "You must choose a <strong>City</strong>";
+        break;     
+
+      case "checkIn": 
+        if (errorType == "required") errorMessage = "You must enter a <strong>Check-In Date</strong>";
+        break;
+      
+      case "checkOut": 
+        if (errorType == "required") errorMessage = "You must enter a <strong>Check-Out Date</strong>";
+        break;
+    }
+
+    return errorMessage;
+  }
+
 
 }

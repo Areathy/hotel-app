@@ -36,15 +36,53 @@
                                 <mat-option *ngFor="let city of cities" [value]="city.cityName">{{city.cityName}}
                                 </mat-option>
                             </mat-autocomplete>
+
+                            <mat-error *ngIf="getFormControl('searchHotel.city').hasError('required')"
+                                [innerHTML]="getErrorMessage('city', 'required')"></mat-error>
+                            <mat-hint align="end">Choose or type a city</mat-hint>
+                            <mat-icon matPrefix class="mr">location_city</mat-icon>
                         </mat-form-field>
 
-                        
+                        <div class="mt" fxLayout="row" fxLayout.lt-md="column">
+
+                            <div fxFlex.lt-md="1 1 100%">
+                                <mat-label>Adults:</mat-label>
+
+                                <button mat-icon-button class="hand-icon" type="button" (click)="decreaseAdults()">
+                                    <mat-icon>remove_circle</mat-icon>
+                                </button>
+
+                                <span class="font-weight-bold">{{formGroup.value.searchHotel.adults}}</span>
+
+                                <button mat-icon-button class="hand-icon" type="button" (click)="increaseAdults()">
+                                    <mat-icon>add_circle</mat-icon>
+                                </button>
+                            </div>
+
+
+                            <div fxFlex.lt-md="1 1 100%" style="margin-left:50px">
+                                <mat-label>Children:</mat-label>
+
+                                <button mat-icon-button class="hand-icon" type="button" (click)="decreaseChildren()">
+                                    <mat-icon>remove_circle</mat-icon>
+                                </button>
+
+                                <span class="font-weight-bold">{{formGroup.value.searchHotel.children}}</span>
+
+                                <button mat-icon-button class="hand-icon" type="button" (click)="increaseChildren()">
+                                    <mat-icon>add_circle</mat-icon>
+                                </button>
+                            </div>
+
+                        </div>
+
+
                     </div>
                     <!-- box 1 ends -->
 
                     <!-- box 2 starts -->
                     <div fxFlex="1 1 calc(50% - 20px)" fxFlex.lt-md="1 1 100%">
-                        
+
                     </div>
                     <!-- box 2 ends -->
                 </div>
