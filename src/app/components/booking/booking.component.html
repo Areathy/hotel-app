@@ -83,6 +83,27 @@
                     <!-- box 2 starts -->
                     <div fxFlex="1 1 calc(50% - 20px)" fxFlex.lt-md="1 1 100%">
 
+                        <!-- date range input -->
+                        <mat-form-field class="w-100" color="primary">
+                            <mat-label>Check-in and Check-out dates</mat-label>
+
+                            <mat-date-range-input [rangePicker]="picker">
+                                <input matStartDate placeholder="Check-in date" formControlName="checkIn" />
+                                <input matEndDate placeholder="Check-out date" formControlName="checkOut" />
+                            </mat-date-range-input>
+
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+
+                            <mat-date-range-picker #picker></mat-date-range-picker>
+                            <mat-icon matPrefix class="mr">pending_actions</mat-icon>
+
+                            <mat-error *ngIf="getFormControl('searchHotel.checkIn').hasError('required')"
+                                [innerHTML]="getErrorMessage('checkIn', 'required')"></mat-error>
+
+                            <mat-error *ngIf="getFormControl('searchHotel.checkOut').hasError('required')"
+                                [innerHTML]="getErrorMessage('checkOut', 'required')"></mat-error>
+                        </mat-form-field>
+
                     </div>
                     <!-- box 2 ends -->
                 </div>
@@ -98,3 +119,7 @@
     <mat-step label="Payment">six</mat-step>
     <mat-step label="Finish">seven</mat-step>
 </mat-horizontal-stepper>
+
+<div class="mb">
+    {{formGroup.value | json}}
+</div>
