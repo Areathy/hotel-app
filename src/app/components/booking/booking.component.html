@@ -9,6 +9,7 @@
 
 <mat-horizontal-stepper>
 
+    <!-- Search for a hotel starts -->
     <mat-step label="Search for a hotel" stepControlName="searchHotel">
         <form [formGroup]="formGroup">
             <div class="form-container mb mt" formGroupName="searchHotel">
@@ -111,8 +112,46 @@
             </div>
         </form>
     </mat-step>
+    <!-- Search for a hotel sendstarts -->
 
-    <mat-step label="Choose a hotel">two</mat-step>
+    <!-- Choose a hotel starts -->
+    <mat-step label=" Choose a hotel">
+        <h2 class="section-header" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="space-between stretch">
+            <div fxFlex="1 1 40%" fxFlex="1 1 100%">Choose a hotel</div>
+            <div fxFlex="1 1 60%" fxFlex="1 1 100%" [ngClass.gt-xs]="{ 'text-right': true}">
+                <button mat-stroked-button color="accent" matStepperPrevious>
+                    <mat-icon>chevron_left</mat-icon>&nbsp;
+                    <span>Back...</span>
+                </button>
+            </div>
+        </h2>
+
+        <div fxLayout="row" fxLayoutAlign="start space-between" fxLayoutGap="20px" fxLayout.lt-md="column">
+            <mat-card fxFlex="1 1 20%" fxFlex.lt-md="1 1 100%" *ngFor="let hotel of hotels">
+                <mat-card-header>
+                    <mat-card-title>{{hotel.hotelName}}</mat-card-title>
+                    <mat-card-subtitle>{{hotel.hotelLocation}}</mat-card-subtitle>
+                </mat-card-header>
+
+                <mat-card-actions>
+                    <button mat-flat-button color="primary" matStepperNext (click)="chooseHotel(hotel)">
+                        <span>Choose this Hotel</span>&nbsp;
+                        <mat-icon>chevron_right</mat-icon>
+                    </button>
+                </mat-card-actions>
+
+                <img mat-card-image [src]="hotel.hotelImage" [alt]="hotel.hotelImage">
+
+                <mat-card-content>
+                    <p class="text-small">
+                        {{hotel.hotelDescription}}
+                    </p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </mat-step>
+    <!-- Choose a hotel ends -->
+
     <mat-step label="Choose a Room">three</mat-step>
     <mat-step label="Personal Information">four</mat-step>
     <mat-step label="Guests Information">five</mat-step>

@@ -17,11 +17,12 @@ import { MatStepperModule } from "@angular/material/stepper";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
+import { MatCardModule } from "@angular/material/card";
 
 let materialModules = [
   MatButtonModule, MatInputModule, MatToolbarModule, MatIconModule, MatMenuModule, MatExpansionModule, MatBadgeModule,
   MatDividerModule, MatTooltipModule, MatSidenavModule, MatListModule, MatRippleModule, MatGridListModule, MatProgressBarModule,
-  MatStepperModule, MatAutocompleteModule, MatDatepickerModule, MatNativeDateModule
+  MatStepperModule, MatAutocompleteModule, MatDatepickerModule, MatNativeDateModule, MatCardModule
 ];
 
 @NgModule({

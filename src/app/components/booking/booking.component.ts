@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { debounceTime, tap, switchMap, startWith, map } from "rxjs/operators";
+import { Hotel } from 'src/app/models/hotel';
+import { HotelsService } from 'src/app/services/hotels.service';
 
 import { City } from "../../models/city";
 import { CitiesService } from "../../services/cities.service";
@@ -16,13 +18,14 @@ export class BookingComponent implements OnInit {
   formGroup!: FormGroup;
   cities: City[] = [];
   isCitiesLoading: boolean = false;
+  hotels: Hotel[] = [];
 
   minAdults: number = 1;
   maxAdults: number = 2;
   minChildren: number = 0;
   maxChildren: number = 2;
 
-  constructor(private citiesService: CitiesService) {
+  constructor(private citiesService: CitiesService, private hotelsService: HotelsService) {
     //formgroup
     this.formGroup = new FormGroup({
       searchHotel: new FormGroup({
@@ -31,6 +34,10 @@ export class BookingComponent implements OnInit {
         checkOut: new FormControl(null, [Validators.required]),
         adults: new FormControl(1, [Validators.min(1)]),
         children: new FormControl(0, [Validators.min(0)]),
+      }),
+
+      chooseHotel: new FormGroup({
+        hotel: new FormControl(null, [Validators.required])
       })
     });
   }
@@ -62,6 +69,16 @@ export class BookingComponent implements OnInit {
           this.isCitiesLoading = false;
         }
       );
+
+    //hotels
+    this.hotelsService.getHotels().subscribe(
+      (response: Hotel[]) => {
+        this.hotels = response;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   //increase adults
@@ -100,6 +117,13 @@ export class BookingComponent implements OnInit {
     }
   }
 
+  chooseHotel(hotel: any) {
+    this.getFormControl("chooseHotel").patchValue({
+      hotel: hotel.hotelName
+    });
+  }
+
+
   //returns the form control object based on the form control name
   getFormControl(controlName: string): FormControl {
     return this.formGroup.get(controlName) as FormControl;
@@ -109,15 +133,15 @@ export class BookingComponent implements OnInit {
   getErrorMessage(controlName: string, errorType: string): string {
     let errorMessage: string = "";
     switch (controlName) {
-      case "city": 
+      case "city":
         if (errorType == "required") errorMessage = "You must choose a <strong>City</strong>";
-        break;     
+        break;
 
-      case "checkIn": 
+      case "checkIn":
         if (errorType == "required") errorMessage = "You must enter a <strong>Check-In Date</strong>";
         break;
-      
-      case "checkOut": 
+
+      case "checkOut":
         if (errorType == "required") errorMessage = "You must enter a <strong>Check-Out Date</strong>";
         break;
     }
