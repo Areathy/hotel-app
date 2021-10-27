@@ -152,7 +152,92 @@
     </mat-step>
     <!-- Choose a hotel ends -->
 
-    <mat-step label="Choose a Room">three</mat-step>
+    <!-- Choose a room starts -->
+    <mat-step label="Choose a Room">
+        <form [formGroup]="formGroup">
+            <div formGroupName="chooseRoom" class="form-container mt mb">
+
+                <h2 class="section-header" fxLayout="row" fxLayoutAlign="space-between stretch" fxLayout.lt-sm="column">
+                    <div fxFlex="1 1 40%" fxFlex.lt-sm="1 1 100%">
+                        Room Tarrif
+                    </div>
+
+                    <div fxFlex="1 1 60%" fxFlex.lt-sm="1 1 100%" [ngClass.gt-xs]="{ 'text-right': true }">
+                        <button mat-stroked-button color="accent" matStepperPrevious class="mr">
+                            <mat-icon>chevron_left</mat-icon>&nbsp;
+                            <span>Back...</span>
+                        </button>
+
+                        <button mat-flat-button color="primary" matStepperNext>
+                            <span>Confirm & Next</span>&nbsp;
+                            <mat-icon>chevron_right</mat-icon>
+                        </button>
+
+                    </div>
+                </h2>
+
+                <!-- button toggle -->
+                <div class="mb mt" fxLayout="row" fxLayoutAlign="start stretch" fxLayout.lt-lg="column"
+                    fxLayoutGap="20px" fxLayoutGap.lt-lg="0px">
+
+                    <!-- first box starts -->
+                    <div fxFlex="1 1 70%" fxFlex.lt-lg="1 1 100%">
+                        <div>
+                            <mat-label>Choose a Room Type:</mat-label>
+                        </div>
+
+                        <mat-button-toggle-group #group="matButtonToggleGroup" formControlName="roomType" vertical
+                            class="w-100">
+
+                            <mat-button-toggle *ngFor="let roomType of roomTypes" [value]="roomType.roomTypeName"
+                                class="room-type">
+
+                                <div class="text-left">
+                                    <h3 class="room-type-heading" fxLayout="row" fxLayoutAlign="space-between start"
+                                        fxLayout.lt-lg="column">
+
+                                        <div fxLayout="row" fxFlex="1 1 50%" fxFlex.lt-lg="1 1 100%">
+                                            <mat-icon class="mr">king_bed</mat-icon>
+                                            <span> {{roomType.roomTypeName}}</span>
+                                        </div>
+
+                                        <div fxFlex="1 1 50%" fxFlex.lt-lg="1 1 100%">
+                                            <span class="room-type-price">{{roomType.price | currency}} <i
+                                                    class="grey">per night</i></span>
+                                        </div>
+                                    </h3>
+
+
+                                    <div class="room-type-content" fxLayout="row" fxLayout.lt-md="column">
+                                        <div fxFlex="1 1 50%" fxFlex.lt-md="1 1 100%">
+                                            <div>{{roomType.vat | percent}} VAT included in price</div>
+                                            <div>Max: {{roomType.maxPersons}} Persons(s)</div>
+                                        </div>
+                                        <div fxFlex="1 1 50%" fxFlex.lt-md="1 1 100%">
+                                            <div>Check-in Time: {{roomType.checkIn}}</div>
+                                            <div>Check-out Time: {{roomType.checkOut}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </mat-button-toggle>
+
+                        </mat-button-toggle-group>
+                    </div>
+                    <!-- first box ends -->
+
+                    <!-- second box starts -->
+                    <div fxFlex="1 1 30%" fxFlex.lt-lg="1 1 100%">
+                        checkboxes here
+                    </div>
+                    <!-- second box ends -->
+
+                </div>
+            </div>
+        </form>
+    </mat-step>
+    <!-- Choose a room ends -->
+
     <mat-step label="Personal Information">four</mat-step>
     <mat-step label="Guests Information">five</mat-step>
     <mat-step label="Payment">six</mat-step>

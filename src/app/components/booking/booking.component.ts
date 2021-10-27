@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { FormGroup, FormControl, Validators, FormArray } from "@angular/forms";
 import { debounceTime, tap, switchMap, startWith, map } from "rxjs/operators";
 import { Hotel } from 'src/app/models/hotel';
 import { HotelsService } from 'src/app/services/hotels.service';
 
 import { City } from "../../models/city";
 import { CitiesService } from "../../services/cities.service";
+import { RoomType } from "../../models/room-type"; 
+import { RoomTypesService } from "../../services/room-types.service";
 
 @Component({
   selector: 'app-booking',
@@ -19,13 +21,21 @@ export class BookingComponent implements OnInit {
   cities: City[] = [];
   isCitiesLoading: boolean = false;
   hotels: Hotel[] = [];
+  roomTypes: RoomType[] = [];
 
   minAdults: number = 1;
   maxAdults: number = 2;
   minChildren: number = 0;
   maxChildren: number = 2;
 
-  constructor(private citiesService: CitiesService, private hotelsService: HotelsService) {
+  //checkbox group
+  allDineIn: any[] = [
+    { id: 1, dineInName: "Breakfast" },
+    { id: 2, dineInName: "Lunch" },
+    { id: 3, dineInName: "Dinner" }
+  ];
+
+  constructor(private citiesService: CitiesService, private hotelsService: HotelsService, private roomTypesService: RoomTypesService) {
     //formgroup
     this.formGroup = new FormGroup({
       searchHotel: new FormGroup({
@@ -38,7 +48,19 @@ export class BookingComponent implements OnInit {
 
       chooseHotel: new FormGroup({
         hotel: new FormControl(null, [Validators.required])
+      }),
+
+      chooseRoom: new FormGroup({
+        roomType: new FormControl("Standard Single Room"),
+        allDineIn: new FormControl(false),
+        dineIn: new FormArray([]),
+        foods: new FormControl(null)
       })
+    });
+
+    //add dine in options
+    this.allDineIn.forEach(() =>  {
+      this.dineInFormArray!.push(new FormControl(false));
     });
   }
 
@@ -79,6 +101,20 @@ export class BookingComponent implements OnInit {
         console.log(error);
       }
     );
+
+    //room types
+    this.roomTypesService.getRoomTypes().subscribe(
+      (response: RoomType[]) => {
+        this.roomTypes = response;
+      },
+      (error) => {
+        console.log(error);
+      }
+    ); 
+  }
+
+  get dineInFormArray(): FormArray | null {
+    return this.formGroup.get("chooseRoom.dineIn") as FormArray;
   }
 
   //increase adults
