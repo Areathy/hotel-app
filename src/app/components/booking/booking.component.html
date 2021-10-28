@@ -228,7 +228,23 @@
 
                     <!-- second box starts -->
                     <div fxFlex="1 1 30%" fxFlex.lt-lg="1 1 100%">
-                        checkboxes here
+
+                        <div class="mt mb">
+                            <mat-label class="mr">Dine In:</mat-label>
+                            <span class="mr">
+                                <mat-checkbox formControlName="allDineIn" (change)="onAllDineInCheckBoxChange()"
+                                    color="primary" [indeterminate]="!isAllDineInSelected() && !isNoDineInSelected()">
+                                    All</mat-checkbox>
+                            </span>
+
+                            <span formArrayName="dineIn">
+                                <span *ngFor="let dineIn of dineInFormArray.controls; let i = index" class="mr">
+                                    <mat-checkbox [formControl]="dineIn" (change)="onDineInChange(index)">
+                                        {{allDineIn[i].dineInName}}</mat-checkbox>
+                                </span>
+                            </span>
+                        </div>
+
                     </div>
                     <!-- second box ends -->
 

@@ -6,7 +6,7 @@ import { HotelsService } from 'src/app/services/hotels.service';
 
 import { City } from "../../models/city";
 import { CitiesService } from "../../services/cities.service";
-import { RoomType } from "../../models/room-type"; 
+import { RoomType } from "../../models/room-type";
 import { RoomTypesService } from "../../services/room-types.service";
 
 @Component({
@@ -59,7 +59,7 @@ export class BookingComponent implements OnInit {
     });
 
     //add dine in options
-    this.allDineIn.forEach(() =>  {
+    this.allDineIn.forEach(() => {
       this.dineInFormArray!.push(new FormControl(false));
     });
   }
@@ -110,7 +110,7 @@ export class BookingComponent implements OnInit {
       (error) => {
         console.log(error);
       }
-    ); 
+    );
   }
 
   get dineInFormArray(): FormArray | null {
@@ -157,6 +157,32 @@ export class BookingComponent implements OnInit {
     this.getFormControl("chooseHotel").patchValue({
       hotel: hotel.hotelName
     });
+  }
+
+  isAllDineInSelected() {
+    //if [true, true, true] then return true
+    return this.dineInFormArray!.value.every((val: any) => val == true);
+  }
+
+  isNoDineInSelected() {
+    //if [false, false, false] then return true
+    return this.dineInFormArray!.value.every((val: any) => val == false);
+  }
+
+  //executes when the user clicks on "All" checkbox
+  onAllDineInCheckBoxChange() {
+    this.allDineIn.forEach((dineIn, index) => {
+      this.dineInFormArray!.at(index).patchValue(this.getFormControl("chooseRoom.allDineIn").value);
+    });
+  }
+
+  //executes when the user checks / unchecks any one of the three checkboxes
+  onDineInChange(index: any) {
+    if (this.isAllDineInSelected()) {
+      this.getFormControl("chooseRoom").patchValue({ allDineIn: true });
+    } else {
+      this.getFormControl("chooseRoom").patchValue({ allDineIn: false });
+    }
   }
 
 
