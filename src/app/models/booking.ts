@@ -1,5 +1,4 @@
-export interface Booking
-{
+export interface Booking {
   id: number;
   city: string;
   hote: string;
