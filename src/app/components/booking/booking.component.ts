@@ -8,13 +8,14 @@ import { City } from "../../models/city";
 import { CitiesService } from "../../services/cities.service";
 import { RoomType } from "../../models/room-type";
 import { RoomTypesService } from "../../services/room-types.service";
+import { Extra } from 'src/app/models/extra';
 
 @Component({
   selector: 'app-booking',
   templateUrl: './booking.component.html',
   styleUrls: ['./booking.component.css']
 })
-export class BookingComponent implements OnInit {
+export class BookingComponent implements OnInit, Extra {
 
   //properties
   formGroup!: FormGroup;
