@@ -80,7 +80,8 @@ export class BookingComponent implements OnInit, Extra {
         roomType: new FormControl("Standard Single Room"),
         allDineIn: new FormControl(false),
         dineIn: new FormArray([]),
-        foods: new FormControl(null)
+        foods: new FormControl(null),
+        extraBed: new FormControl(false)
       })
     });
 

@@ -21,12 +21,13 @@ import { MatCardModule } from "@angular/material/card";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatChipsModule } from "@angular/material/chips";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 
 let materialModules = [
   MatButtonModule, MatInputModule, MatToolbarModule, MatIconModule, MatMenuModule, MatExpansionModule, MatBadgeModule,
   MatDividerModule, MatTooltipModule, MatSidenavModule, MatListModule, MatRippleModule, MatGridListModule, MatProgressBarModule,
   MatStepperModule, MatAutocompleteModule, MatDatepickerModule, MatNativeDateModule, MatCardModule, MatButtonToggleModule,
-  MatCheckboxModule, MatChipsModule
+  MatCheckboxModule, MatChipsModule, MatSlideToggleModule
 ];
 
 @NgModule({
