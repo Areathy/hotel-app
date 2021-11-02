@@ -237,13 +237,34 @@
                                     All</mat-checkbox>
                             </span>
 
-                            <span formArrayName="dineIn">
+                            <!-- <span formArrayName="dineIn">
                                 <span *ngFor="let dineIn of dineInFormArray.controls; let i = index" class="mr">
                                     <mat-checkbox [formControl]="dineIn" (change)="onDineInChange(index)">
                                         {{allDineIn[i].dineInName}}</mat-checkbox>
                                 </span>
-                            </span>
+                            </span> -->
                         </div>
+
+                        <!-- chips with auto complete -->
+                        <mat-form-field class="mt w-100">
+                            <mat-label>Food Menu</mat-label>
+
+                            <mat-chip-list #chipList>
+                                <mat-chip *ngFor="let food of foods" [removable]="true" (removed)="remove(food)">
+                                    {{food.name}}
+                                    <mat-icon matChipRemove>cancel</mat-icon>
+                                </mat-chip>
+                            </mat-chip-list>
+
+                            <input placeholder="Type food name..." [matChipInputFor]="chipList"
+                                [matChipInputSeparatorKeyCodes]="separatorKeyCodes" (matChipInputTokenEnd)="add($event)"
+                                [matAutocomplete]="foodsAutocomplete" formControlName="foods" #foodInput>
+                        </mat-form-field>
+
+                        <mat-autocomplete #foodsAutocomplete="matAutocomplete" (optionSelected)="selected($event)">
+                            <mat-option *ngFor="let food of filteredFoods | async" [value]="food.name">{{food.name}}
+                            </mat-option>
+                        </mat-autocomplete>
 
                     </div>
                     <!-- second box ends -->

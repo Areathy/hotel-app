@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from "@angular/forms";
 import { debounceTime, tap, switchMap, startWith, map } from "rxjs/operators";
+import { Observable } from 'rxjs';
+import { MatChipInputEvent } from "@angular/material/chips";
+import { MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
+import { COMMA, ENTER } from "@angular/cdk/keycodes";
 import { Hotel } from 'src/app/models/hotel';
 import { HotelsService } from 'src/app/services/hotels.service';
 
@@ -9,6 +13,7 @@ import { CitiesService } from "../../services/cities.service";
 import { RoomType } from "../../models/room-type";
 import { RoomTypesService } from "../../services/room-types.service";
 import { Extra } from 'src/app/models/extra';
+import { Food } from 'src/app/models/food';
 
 @Component({
   selector: 'app-booking',
@@ -35,6 +40,26 @@ export class BookingComponent implements OnInit, Extra {
     { id: 2, dineInName: "Lunch" },
     { id: 3, dineInName: "Dinner" }
   ];
+
+  allFoods: Food[] = [
+    { name: "Fries" },
+    { name: "Burger" },
+    { name: "Chicken Combo" },
+    { name: "Family Meal" },
+    { name: "Non Veg Plater" },
+    { name: "BBQ Burger" },
+    { name: "Pizza" }
+  ];
+
+  foods: Food[] = [
+    { name: "Fries" }
+  ];
+
+  filteredFoods!: Observable<Food[]>;
+
+  separatorKeyCodes: number[] = [ENTER, COMMA];
+
+  @ViewChild('foodInput') foodInput!: ElementRef<HTMLInputElement>;
 
   constructor(private citiesService: CitiesService, private hotelsService: HotelsService, private roomTypesService: RoomTypesService) {
     //formgroup
@@ -63,6 +88,19 @@ export class BookingComponent implements OnInit, Extra {
     this.allDineIn.forEach(() => {
       this.dineInFormArray!.push(new FormControl(false));
     });
+
+    //chips with auto complete
+    this.filteredFoods = this.getFormControl("chooseRoom.foods").valueChanges.pipe(
+      startWith(''),
+      map((food: string | null) => {
+        if (food) {
+          const filterValue = food.toLowerCase();
+          return this.allFoods.filter(food => food.name.toLowerCase().indexOf(filterValue) == 0);
+        } else {
+          return this.allFoods.slice();
+        }
+      })
+    );
   }
 
   ngOnInit(): void {
@@ -190,6 +228,33 @@ export class BookingComponent implements OnInit, Extra {
   //returns the form control object based on the form control name
   getFormControl(controlName: string): FormControl {
     return this.formGroup.get(controlName) as FormControl;
+  }
+
+  //executes when the user presses ENTER or COMMA after typing some text
+  add(event: MatChipInputEvent): void {
+    //Add our food
+    if ((event.value || '').trim()) {
+      this.foods.push({ name: event.value.trim() })
+    }
+
+    this.getFormControl("chooseRoom").patchValue({ foods: null });
+    this.foodInput.nativeElement.value = "";
+  }
+
+  //Executes when the user selects a specific item in the auto complete list
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.foods.push({ name: event.option.viewValue });
+    this.getFormControl("chooseRoom").patchValue({ foods: null });
+    this.foodInput.nativeElement.value = "";
+  }
+
+  //Executes when the user clicks on remove (X) button for a chip
+  remove(food: Food): void {
+    let index = this.foods.indexOf(food);
+
+    if (index >= 0) {
+      this.foods.splice(index, 1);
+    }
   }
 
   //returns the error message based on the given control name and errorType
