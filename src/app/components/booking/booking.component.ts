@@ -6,14 +6,17 @@ import { MatChipInputEvent } from "@angular/material/chips";
 import { MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
 import { Hotel } from 'src/app/models/hotel';
+
 import { HotelsService } from 'src/app/services/hotels.service';
+import { CitiesService } from "../../services/cities.service";
+import { RoomTypesService } from "../../services/room-types.service";
+import { CountriesService } from 'src/app/services/countries.service';
 
 import { City } from "../../models/city";
-import { CitiesService } from "../../services/cities.service";
 import { RoomType } from "../../models/room-type";
-import { RoomTypesService } from "../../services/room-types.service";
 import { Extra } from 'src/app/models/extra';
 import { Food } from 'src/app/models/food';
+import { Country } from 'src/app/models/country';
 
 @Component({
   selector: 'app-booking',
@@ -28,6 +31,7 @@ export class BookingComponent implements OnInit, Extra {
   isCitiesLoading: boolean = false;
   hotels: Hotel[] = [];
   roomTypes: RoomType[] = [];
+  countries: Country[] = [];
 
   minAdults: number = 1;
   maxAdults: number = 2;
@@ -59,9 +63,14 @@ export class BookingComponent implements OnInit, Extra {
 
   separatorKeyCodes: number[] = [ENTER, COMMA];
 
+  minDate: Date = new Date('1950-01-01');
+  maxDate: Date = new Date('2010-01-01');
+  startDate: Date = new Date('2002-01-01');
+
   @ViewChild('foodInput') foodInput!: ElementRef<HTMLInputElement>;
 
-  constructor(private citiesService: CitiesService, private hotelsService: HotelsService, private roomTypesService: RoomTypesService) {
+  constructor(private citiesService: CitiesService, private hotelsService: HotelsService,
+    private roomTypesService: RoomTypesService, private countriesService: CountriesService) {
     //formgroup
     this.formGroup = new FormGroup({
       searchHotel: new FormGroup({
@@ -82,7 +91,15 @@ export class BookingComponent implements OnInit, Extra {
         dineIn: new FormArray([]),
         foods: new FormControl(null),
         extraBed: new FormControl(false)
-      })
+      }),
+
+      personalInformation: new FormGroup({
+        customerName: new FormControl(null, [Validators.required, Validators.maxLength(30), Validators.pattern('^[A-Za-z. ]*$')]),
+        country: new FormControl(null, [Validators.required]),
+        phone: new FormControl(null),
+        dateOfBirth: new FormControl(null),
+        gender: new FormControl(null)
+      }),
     });
 
     //add dine in options
@@ -146,6 +163,16 @@ export class BookingComponent implements OnInit, Extra {
     this.roomTypesService.getRoomTypes().subscribe(
       (response: RoomType[]) => {
         this.roomTypes = response;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    //countries
+    this.countriesService.getCountries().subscribe(
+      (response: Country[]) => {
+        this.countries = response;
       },
       (error) => {
         console.log(error);
@@ -262,17 +289,31 @@ export class BookingComponent implements OnInit, Extra {
   getErrorMessage(controlName: string, errorType: string): string {
     let errorMessage: string = "";
     switch (controlName) {
-      case "city":
+      case "city": {
         if (errorType == "required") errorMessage = "You must choose a <strong>City</strong>";
+      }
         break;
 
-      case "checkIn":
+      case "checkIn": {
         if (errorType == "required") errorMessage = "You must enter a <strong>Check-In Date</strong>";
+      }
         break;
 
-      case "checkOut":
+      case "checkOut": {
         if (errorType == "required") errorMessage = "You must enter a <strong>Check-Out Date</strong>";
+      }
         break;
+
+      case "customerName": {
+        if (errorType == "required") errorMessage = "You must specify a <strong>Name</strong>";
+        else if (errorType == "maxlength") errorMessage = "<strong>Name</strong> can contain up to 30 characters only";
+        else if (errorType == "pattern") errorMessage = "<strong>Name</strong> can contain alphabets or dot (.) or space only";
+      };
+        break;
+
+      case "country": {
+        if (errorType == "required") errorMessage = "You must choose a <strong>Country</strong>";
+      }
     }
 
     return errorMessage;

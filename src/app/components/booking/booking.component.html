@@ -278,7 +278,109 @@
     </mat-step>
     <!-- Choose a room ends -->
 
-    <mat-step label="Personal Information">four</mat-step>
+    <!-- Personal Information starts -->
+    <mat-step label="Personal Information">
+        <form [formGroup]="formGroup">
+            <div class="form-container mb mt" fxFlex="1 1 100%" formGroupName="personalInformation">
+
+                <h2 class="section-header" fxLayout="row" fxLayoutAlign="space-between stretch" fxLayout.lt-sm="column">
+                    <div fxFlex="1 1 40%" fxFlex.lt-sm="1 1 100%">Personal Information</div>
+
+                    <div fxFlex="1 1 60%" fxFlex.lt-sm="1 1 100%" [ngClass.gt-xs]="{ 'text-right': true }">
+                        <button mat-stroked-button color="accent" matStepperPrevious class="mr">
+                            <mat-icon>chevron_left</mat-icon>&nbsp;
+                            <span>Back...</span>
+                        </button>
+
+                        <button mat-flat-button color="primary" matStepperNext>
+                            <span>Save & Next</span>
+                            <mat-icon>chevron_right</mat-icon>
+                        </button>
+                    </div>
+                </h2>
+
+                <!-- customer name starts -->
+                <mat-form-field class="w-100" color="primary">
+                    <mat-label>Name</mat-label>
+                    <input type="text" matInput formControlName="customerName">
+
+                    <mat-hint align="end">Up to 30 characters</mat-hint>
+                    <mat-error *ngIf="getFormControl('personalInformation.customerName').hasError('required')"
+                        [innerHTML]="getErrorMessage('customerName', 'required')"></mat-error>
+
+                    <mat-error *ngIf="getFormControl('personalInformation.customerName').hasError('maxlength')"
+                        [innerHTML]="getErrorMessage('customerName', 'maxlength')"></mat-error>
+
+                    <mat-error *ngIf="getFormControl('personalInformation.customerName').hasError('pattern')"
+                        [innerHTML]="getErrorMessage('customerName', 'pattern')"></mat-error>
+
+                    <mat-icon matPrefix class="mr">account_circle</mat-icon>
+                </mat-form-field>
+                <!-- customer name ends -->
+
+
+                <!-- phone starts -->
+                <mat-form-field class="w-100" color="primary">
+                    <mat-label>Phone</mat-label>
+                    <input type="text" matInput formControlName="phone">
+                    <mat-icon matPrefix class="mr">phone</mat-icon>
+                </mat-form-field>
+                <!-- phone ends -->
+
+
+                <!-- country starts -->
+                <mat-form-field class="w-100" color="primary">
+                    <mat-label>Country</mat-label>
+
+                    <mat-select formControlName="country">
+                        <mat-option *ngFor="let country of countries" [value]="country.countryName">
+                            {{country.countryName}}</mat-option>
+                    </mat-select>
+
+                    <mat-hint align="end">Choose a country</mat-hint>
+
+                    <mat-error *ngIf="getFormControl('personalInformation.country').hasError('required')"
+                        [innerHTML]="getErrorMessage('country', 'required')"></mat-error>
+
+                    <mat-icon matPrefix class="mr">place</mat-icon>
+                </mat-form-field>
+                <!-- country starts -->
+
+
+                <!-- date of birth starts -->
+                <mat-form-field class="w-100" color="primary">
+                    <mat-label>Date of Birth</mat-label>
+
+                    <input type="text" matInput formControlName="dateOfBirth" [min]="minDate" [max]="maxDate"
+                        [matDatepicker]="dobDatepicker">
+
+                    <mat-datepicker-toggle [for]="dobDatepicker" matSuffix></mat-datepicker-toggle>
+
+                    <mat-datepicker #dobDatepicker startView="month" [startAt]="startDate"></mat-datepicker>
+
+                    <mat-hint align="end">Choose date of birth</mat-hint>
+
+                    <mat-icon matPrefix class="mr">calendar_today</mat-icon>
+                </mat-form-field>
+                <!-- date of birth ends -->
+
+                <!-- gender starts -->
+                <div class="mt mb">
+                    <mat-radio-group formControlName="gender">
+                        <mat-label class="mr">Gender:</mat-label>
+
+                        <mat-radio-button value="male" class="mr">Male</mat-radio-button>
+                        <mat-radio-button value="female" class="ml mr">Female</mat-radio-button>
+                        <mat-radio-button value="others">Others</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <!-- gender ends -->
+
+            </div>
+        </form>
+    </mat-step>
+    <!-- Personal Information ends -->
+    
     <mat-step label="Guests Information">five</mat-step>
     <mat-step label="Payment">six</mat-step>
     <mat-step label="Finish">seven</mat-step>
