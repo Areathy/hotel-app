@@ -380,8 +380,89 @@
         </form>
     </mat-step>
     <!-- Personal Information ends -->
-    
-    <mat-step label="Guests Information">five</mat-step>
+
+    <!-- guests information -->
+    <mat-step label="Guests Information">
+        <form [formGroup]="formGroup">
+            <div class="form-container" formGroupName="guestsInformation">
+
+                <h2 class="section-header" fxLayout="row" fxLayoutAlign="space-between stretch" fxLayout.lt-md="column">
+                    <div fxFlex="1 1 40%" fxFlex.lt-md="1 1 100%">Guests Information</div>
+                    <div fxFlex="1 1 60%" fxFlex.lt-md="1 1 100%" [ngClass.gt-xs]="{ 'text-right': true }">
+
+                        <button mat-stroked-button color="accent" matStepperPrevious class="mr">
+                            <mat-icon>chevron_left</mat-icon>&nbsp;
+                            <span>Back...</span>
+                        </button>
+
+                        <button mat-flat-button color="primary" matStepperNext>
+                            <span>Save & Next</span>&nbsp;
+                            <mat-icon>chevron_right</mat-icon>
+                        </button>
+
+                    </div>
+                </h2>
+
+                <!-- guest 1 starts -->
+                <div class="guest-1">
+                    <div class="font-weight-bold text-blue">Guest 1</div>
+
+                    <mat-form-field class="w-100" color="primary">
+                        <mat-label>Guest Name</mat-label>
+                        <input type="text" matInput formControlName="guest1Name">
+                        <mat-icon matPrefix class="mr">people_alt</mat-icon>
+                    </mat-form-field>
+
+                    <div fxLayout="row">
+                        <mat-form-field fxFlex="1 1 50%" color="primary">
+                            <mat-label>Age</mat-label>
+                            <input type="number" matInput formControlName="guest1Age">
+                            <mat-icon matPrefix class="mr">event</mat-icon>
+                        </mat-form-field>
+
+                        <div class="pt">
+                            <mat-radio-group formControlName="guest1Gender">
+                                <mat-radio-button value="male" class="ml mr">Male</mat-radio-button>
+                                <mat-radio-button value="female" class="ml mr">Female</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+                </div>
+                <!-- guest 1 ends -->
+
+
+
+                <!-- guest 2 starts -->
+                <div class="guest-1">
+                    <div class="font-weight-bold text-blue">Guest 2</div>
+
+                    <mat-form-field class="w-100" color="primary">
+                        <mat-label>Guest Name</mat-label>
+                        <input type="text" matInput formControlName="guest2Name">
+                        <mat-icon matPrefix class="mr">people_alt</mat-icon>
+                    </mat-form-field>
+
+                    <div fxLayout="row">
+                        <mat-form-field fxFlex="1 1 50%" color="primary">
+                            <mat-label>Age</mat-label>
+                            <input type="number" matInput formControlName="guest2Age">
+                            <mat-icon matPrefix class="mr">event</mat-icon>
+                        </mat-form-field>
+
+                        <div class="pt">
+                            <mat-radio-group formControlName="guest2Gender">
+                                <mat-radio-button value="male" class="ml mr">Male</mat-radio-button>
+                                <mat-radio-button value="female" class="ml mr">Female</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+                </div>
+                <!-- guest 1 ends -->
+            </div>
+        </form>
+    </mat-step>
+    <!-- guests information -->
+
     <mat-step label="Payment">six</mat-step>
     <mat-step label="Finish">seven</mat-step>
 </mat-horizontal-stepper>

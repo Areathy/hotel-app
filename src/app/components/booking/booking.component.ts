@@ -100,6 +100,15 @@ export class BookingComponent implements OnInit, Extra {
         dateOfBirth: new FormControl(null),
         gender: new FormControl(null)
       }),
+
+      guestsInformation: new FormGroup({
+        guest1Name: new FormControl(null),
+        guest1Age: new FormControl(null),
+        guest1Gender: new FormControl(null),
+        guest2Name: new FormControl(null),
+        guest2Age: new FormControl(null),
+        guest2Gender: new FormControl(null)
+      })
     });
 
     //add dine in options
