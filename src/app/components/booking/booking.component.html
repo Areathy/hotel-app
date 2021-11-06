@@ -381,7 +381,7 @@
     </mat-step>
     <!-- Personal Information ends -->
 
-    <!-- guests information -->
+    <!-- guests information starts -->
     <mat-step label="Guests Information">
         <form [formGroup]="formGroup">
             <div class="form-container" formGroupName="guestsInformation">
@@ -461,9 +461,64 @@
             </div>
         </form>
     </mat-step>
-    <!-- guests information -->
+    <!-- guests information ends -->
 
-    <mat-step label="Payment">six</mat-step>
+    <!-- Payments starts -->
+    <mat-step label="Payment">
+        <form [formGroup]="formGroup">
+            <div class="form-container" formGroupName="payment">
+                <h2 class="section-header" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch">
+                    <div fxFlex="1 1 40%" fxFlex.lt-md="1 1 100%">Payment</div>
+
+                    <div fxFlex="1 1 60%" fxFlex.lt-md="1 1 100%" [ngClass.gt-sm]="{ 'text-right': true }">
+                        <button mat-stroked-button color="accent" matStepperPrevious class="mr">
+                            <mat-icon>chevron_left</mat-icon>&nbsp;
+                            <span>Back...</span>
+                        </button>
+
+                        <button mat-flat-button color="primary" matStepperNext>
+                            <span>Save & Next</span>&nbsp;
+                            <mat-icon>chevron_right</mat-icon>
+                        </button>
+                    </div>
+                </h2>
+
+                <mat-tab-group>
+                    <mat-tab label="Credit Card Payment">
+                        <div class="font-weight-bold text-blue mt">Credit card details</div>
+
+                        <div fxLayout="row" fxLayoutAlign="space-between stretch" fxLayoutGap="35px"
+                            fxLayout.lt-md="column" fxLayoutGap.lt-md="0px">
+
+                            <mat-form-field fxFlex="1 1 50%" color="primary">
+                                <mat-label>Credit Card Number</mat-label>
+                                <input type="number" matInput formControlName="creditCardNumber">
+                                <mat-icon matPrefix class="mr">payment</mat-icon>
+                            </mat-form-field>
+
+                            <mat-form-field fxFlex="1 1 50%" color="primary">
+                                <mat-label>CVV</mat-label>
+                                <input type="number" matInput formControlName="cvv">
+                                <mat-icon matPrefix class="mr">vpn_key</mat-icon>
+                            </mat-form-field>
+                        </div>
+
+                    </mat-tab>
+
+                    <mat-tab label="Gift Card Payment">
+                        <div class="font-weight-bold text-blue mt">Gift card Details</div>
+                        <mat-form-field color="primary" class="w-100">
+                            <mat-label>Gift Card Number</mat-label>
+                            <input type="number" matInput formControlName="giftCardNumber">
+                            <mat-icon matPrefix class="mr">payment</mat-icon>
+                        </mat-form-field>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+        </form>
+    </mat-step>
+    <!-- Payments ends -->
+
     <mat-step label="Finish">seven</mat-step>
 </mat-horizontal-stepper>
 

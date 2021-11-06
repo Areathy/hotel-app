@@ -108,7 +108,13 @@ export class BookingComponent implements OnInit, Extra {
         guest2Name: new FormControl(null),
         guest2Age: new FormControl(null),
         guest2Gender: new FormControl(null)
-      })
+      }), 
+
+      payment: new FormGroup({
+        creditCardNumber: new FormControl(null),
+        cvv: new FormControl(null),
+        giftCardNumber: new FormControl(null)
+      }) 
     });
 
     //add dine in options
