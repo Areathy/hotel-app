@@ -17,6 +17,8 @@ import { RoomType } from "../../models/room-type";
 import { Extra } from 'src/app/models/extra';
 import { Food } from 'src/app/models/food';
 import { Country } from 'src/app/models/country';
+import { Booking } from 'src/app/models/booking';
+import { BookingsService } from 'src/app/services/bookings.service';
 
 @Component({
   selector: 'app-booking',
@@ -70,7 +72,7 @@ export class BookingComponent implements OnInit, Extra {
   @ViewChild('foodInput') foodInput!: ElementRef<HTMLInputElement>;
 
   constructor(private citiesService: CitiesService, private hotelsService: HotelsService,
-    private roomTypesService: RoomTypesService, private countriesService: CountriesService) {
+    private roomTypesService: RoomTypesService, private countriesService: CountriesService, private bookingsService: BookingsService) {
     //formgroup
     this.formGroup = new FormGroup({
       searchHotel: new FormGroup({
@@ -108,13 +110,13 @@ export class BookingComponent implements OnInit, Extra {
         guest2Name: new FormControl(null),
         guest2Age: new FormControl(null),
         guest2Gender: new FormControl(null)
-      }), 
+      }),
 
       payment: new FormGroup({
         creditCardNumber: new FormControl(null),
         cvv: new FormControl(null),
         giftCardNumber: new FormControl(null)
-      }) 
+      })
     });
 
     //add dine in options
@@ -298,6 +300,26 @@ export class BookingComponent implements OnInit, Extra {
     if (index >= 0) {
       this.foods.splice(index, 1);
     }
+  }
+
+  //Executes when the user clicks on "Save" button in the "Payment" step
+  onFinishClick() {
+    console.log(this.formGroup.value);
+    let booking = {
+      ...this.formGroup.value.searchHotel, ...this.formGroup.value.chooseHotel,
+      ...this.formGroup.value.chooseRoom, ...this.formGroup.value.personalInformation,
+      ...this.formGroup.value.guestsInformation, ...this.formGroup.value.payment, foods: this.foods, status: "Not Paid"
+    };
+
+    //post
+    this.bookingsService.postBooking(booking).subscribe(
+      (response: Booking) => {
+        console.log(response);
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 
   //returns the error message based on the given control name and errorType

@@ -9,10 +9,12 @@ import { HttpClient } from "@angular/common/http";
 })
 export class BookingsService {
 
+  urlPrefix: string = "http://localhost:7000";
+
   constructor(private httpClient: HttpClient) { }
 
   getBookings(): Observable<Booking> {
-    return this.httpClient.get<Booking[]>(`http://localhost:7000/bookings?_sort=checkIn@_order=desc`).pipe(map(
+    return this.httpClient.get<Booking[]>(this.urlPrefix + `/bookings?_sort=checkIn@_order=desc`).pipe(map(
       (bookings: any) => {
         bookings.forEach((booking: any) => {
           booking.checkIn = new Date(booking.checkIn);
@@ -23,5 +25,9 @@ export class BookingsService {
         return bookings;
       }
     ));
+  }
+
+  postBooking(booking: Booking): Observable<Booking> {
+    return this.httpClient.post<Booking>(this.urlPrefix + `/bookings`, booking);
   }
 }
