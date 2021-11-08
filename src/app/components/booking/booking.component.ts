@@ -19,6 +19,7 @@ import { Food } from 'src/app/models/food';
 import { Country } from 'src/app/models/country';
 import { Booking } from 'src/app/models/booking';
 import { BookingsService } from 'src/app/services/bookings.service';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-booking',
@@ -70,6 +71,7 @@ export class BookingComponent implements OnInit, Extra {
   startDate: Date = new Date('2002-01-01');
 
   @ViewChild('foodInput') foodInput!: ElementRef<HTMLInputElement>;
+  @ViewChild("stepper") stepper!: MatStepper;
 
   constructor(private citiesService: CitiesService, private hotelsService: HotelsService,
     private roomTypesService: RoomTypesService, private countriesService: CountriesService, private bookingsService: BookingsService) {
@@ -195,6 +197,11 @@ export class BookingComponent implements OnInit, Extra {
         console.log(error);
       }
     );
+
+    //reset stepper
+    setTimeout(() => {
+      this.stepper.reset();
+    }, 200)
   }
 
   get dineInFormArray(): FormArray | null {

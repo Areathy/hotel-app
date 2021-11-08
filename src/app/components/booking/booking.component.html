@@ -7,17 +7,18 @@
         </a></div>
 </div>
 
-<mat-horizontal-stepper>
+<mat-horizontal-stepper linear="true" #stepper>
 
     <!-- Search for a hotel starts -->
-    <mat-step label="Search for a hotel" stepControlName="searchHotel">
+    <mat-step label="Search for a hotel" stepControlName="searchHotel"
+        [completed]="formGroup.get('searchHotel')?.valid">
         <form [formGroup]="formGroup">
             <div class="form-container mb mt" formGroupName="searchHotel">
 
                 <h2 class="section-header" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="space-between stretch">
                     <div fxFlex="1 1 40%" fxFlex="1 1 100%">Search for a hotel</div>
                     <div fxFlex="1 1 60%" fxFlex="1 1 100%" [ngClass.gt-xs]="{ 'text-right': true}">
-                        <button mat-flat-button color="primary">
+                        <button mat-flat-button color="primary" matStepperNext>
                             <span>Search Hotels</span>
                             <mat-icon>chevron_right</mat-icon>
                         </button>
@@ -115,7 +116,7 @@
     <!-- Search for a hotel sendstarts -->
 
     <!-- Choose a hotel starts -->
-    <mat-step label=" Choose a hotel">
+    <mat-step label=" Choose a hotel" stepControlName="chooseHotel" [completed]="formGroup.get('chooseHotel')?.valid">
         <h2 class="section-header" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="space-between stretch">
             <div fxFlex="1 1 40%" fxFlex="1 1 100%">Choose a hotel</div>
             <div fxFlex="1 1 60%" fxFlex="1 1 100%" [ngClass.gt-xs]="{ 'text-right': true}">
@@ -153,7 +154,7 @@
     <!-- Choose a hotel ends -->
 
     <!-- Choose a room starts -->
-    <mat-step label="Choose a Room">
+    <mat-step label="Choose a Room" stepControlName="chooseRoom" [completed]="formGroup.get('chooseRoom')?.valid">
         <form [formGroup]="formGroup">
             <div formGroupName="chooseRoom" class="form-container mt mb">
 
@@ -169,7 +170,7 @@
                         </button>
 
                         <button mat-flat-button color="primary" matStepperNext>
-                            <span>Confirm & Next</span>&nbsp;
+                            <span >Confirm & Next</span>&nbsp;
                             <mat-icon>chevron_right</mat-icon>
                         </button>
 
@@ -229,8 +230,10 @@
                     <!-- second box starts -->
                     <div fxFlex="1 1 30%" fxFlex.lt-lg="1 1 100%">
                         <div class="mt mb">
-                            <mat-slide-toggle formControlName="extraBed"></mat-slide-toggle>
+                            <mat-slide-toggle formControlName="extraBed">Extra Bed</mat-slide-toggle>
                         </div>
+
+                        <mat-divider></mat-divider>
 
                         <div class="mt mb">
                             <mat-label class="mr">Dine In:</mat-label>
@@ -279,7 +282,8 @@
     <!-- Choose a room ends -->
 
     <!-- Personal Information starts -->
-    <mat-step label="Personal Information">
+    <mat-step label="Personal Information" stepControlName="personalInformation"
+        [completed]="formGroup.get('personalInformation')?.valid">
         <form [formGroup]="formGroup">
             <div class="form-container mb mt" fxFlex="1 1 100%" formGroupName="personalInformation">
 
@@ -382,7 +386,8 @@
     <!-- Personal Information ends -->
 
     <!-- guests information starts -->
-    <mat-step label="Guests Information">
+    <mat-step label="Guests Information" stepControlName="guestsInformation"
+        [completed]="formGroup.get('guestsInformation')?.valid">
         <form [formGroup]="formGroup">
             <div class="form-container" formGroupName="guestsInformation">
 
@@ -464,7 +469,7 @@
     <!-- guests information ends -->
 
     <!-- Payments starts -->
-    <mat-step label="Payment">
+    <mat-step label="Payment" stepControlName="payment" [completed]="formGroup.get('payment')?.valid">
         <form [formGroup]="formGroup">
             <div class="form-container" formGroupName="payment">
                 <h2 class="section-header" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch">
@@ -519,7 +524,15 @@
     </mat-step>
     <!-- Payments ends -->
 
-    <mat-step label="Finish">seven</mat-step>
+    <!-- Finish Starts -->
+    <mat-step label="Finish">
+        <p>Congratulations, your booking is confirmed</p>
+        <div>
+            <a [routerLink]="[ '/bookings-list' ]" mat-flat-button class="button-green">Go to Bookings List</a>
+        </div>
+    </mat-step>
+    <!-- Finish Ends -->
+
 </mat-horizontal-stepper>
 
 <div class="mb">
