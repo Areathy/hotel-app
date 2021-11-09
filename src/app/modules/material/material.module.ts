@@ -26,11 +26,17 @@ import { MatRadioModule } from "@angular/material/radio";
 import { MatSelectModule } from "@angular/material/select";
 import { MatTabsModule } from "@angular/material/tabs";
 
+import { MatTableModule } from "@angular/material/table";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatSortModule } from "@angular/material/sort";
+
 let materialModules = [
   MatButtonModule, MatInputModule, MatToolbarModule, MatIconModule, MatMenuModule, MatExpansionModule, MatBadgeModule,
   MatDividerModule, MatTooltipModule, MatSidenavModule, MatListModule, MatRippleModule, MatGridListModule, MatProgressBarModule,
   MatStepperModule, MatAutocompleteModule, MatDatepickerModule, MatNativeDateModule, MatCardModule, MatButtonToggleModule,
-  MatCheckboxModule, MatChipsModule, MatSlideToggleModule, MatRadioModule, MatSelectModule, MatTabsModule
+  MatCheckboxModule, MatChipsModule, MatSlideToggleModule, MatRadioModule, MatSelectModule, MatTabsModule, MatTableModule,
+  MatPaginatorModule, MatProgressSpinnerModule, MatSortModule
 ];
 
 @NgModule({

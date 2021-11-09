@@ -13,7 +13,7 @@ export class BookingsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getBookings(): Observable<Booking> {
+  getBookings(): Observable<Booking[]> {
     return this.httpClient.get<Booking[]>(this.urlPrefix + `/bookings?_sort=checkIn@_order=desc`).pipe(map(
       (bookings: any) => {
         bookings.forEach((booking: any) => {
