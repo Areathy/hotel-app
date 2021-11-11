@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from "@angular/material/table";
 import { FormGroup, FormControl } from "@angular/forms";
 import { MatPaginator } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
 
 import { Booking } from "../../models/booking";
 import { BookingsService } from "../../services/bookings.service";
@@ -20,6 +21,7 @@ export class BookingsListComponent implements OnInit {
   rows: Booking[] = [];
   formGroup!: FormGroup;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private bookingsService: BookingsService) {
     this.formGroup = new FormGroup({
@@ -38,6 +40,7 @@ export class BookingsListComponent implements OnInit {
         this.isLoadingCompleted = true;
 
         this.bookings.paginator = this.paginator;
+        this.bookings.sort = this.sort;
 
         //filterPredicate
         this.bookings.filterPredicate = (data, filter) => {
