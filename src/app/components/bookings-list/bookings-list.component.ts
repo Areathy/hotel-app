@@ -58,4 +58,10 @@ export class BookingsListComponent implements OnInit {
     }
   }
 
+  //Executes when the user clicks on clear button for search textbox
+  clearFilter() {
+    this.formGroup.patchValue({ search: "" });
+    this.filterBookings();
+  }
+
 }

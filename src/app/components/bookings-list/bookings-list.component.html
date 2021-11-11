@@ -7,93 +7,118 @@
     </div>
 </div>
 
-<div class="table-container">
-    <table mat-table class="w-100" [dataSource]="bookings">
+<form [formGroup]="formGroup">
+    <mat-form-field appearance="fill" class="w-100" floatLabel="never">
+        <mat-label>Search</mat-label>
+        <input type="search" matInput formControlName="search" (keyup)="filterBookings()">
+        <mat-icon matPrefix>search</mat-icon>
+        <mat-icon matSuffix (click)="clearFilter()" class="hand-icon">close</mat-icon>
+    </mat-form-field>
 
-        <!-- customer name column stars -->
-        <ng-container matColumnDef="customerName">
-            <th mat-header-cell *matHeaderCellDef matTooltip="Name of the customer" matTooltipClass="yellow-back">Customer Name</th>
+    <div class="table-container">
+        <table mat-table class="w-100" [dataSource]="bookings">
 
-            <td mat-cell *matCellDef="let booking" class="w-15">{{booking.customerName}}</td>
+            <!-- customer name column stars -->
+            <ng-container matColumnDef="customerName">
+                <th mat-header-cell *matHeaderCellDef matTooltip="Name of the customer" matTooltipClass="yellow-back">
+                    Customer Name</th>
 
-            <td mat-footer-cell *matFooterCellDef colspan="2">Total Bookings:</td>
+                <td mat-cell *matCellDef="let booking" class="w-15">{{booking.customerName}}</td>
 
-        </ng-container>
-        <!-- customer name column ends -->
+                <td mat-footer-cell *matFooterCellDef colspan="2">Total Bookings:</td>
 
-        <!-- checkIn column stars -->
-        <ng-container matColumnDef="checkIn">
-            <th mat-header-cell *matHeaderCellDef matTooltip="Check-In and Check-Out" matTooltipClass="yellow-back">
-                Check-In <mat-icon>arrow_right_alt</mat-icon> Check-Out
-            </th>
-            <td mat-cell *matCellDef="let booking" class="w-30">
+            </ng-container>
+            <!-- customer name column ends -->
 
-                <div fxLayout="row" fxLayoutAlign="start center">
-                    <div>{{booking.checkIn | date: "mediumDate"}}</div>
-                    <mat-icon>arrow_right_alt</mat-icon>
-                    <div>{{booking.checkOut | date: "mediumDate"}}</div>
-                </div>
-            </td>
-        </ng-container>
-        <!-- checkIn column ends -->
+            <!-- checkIn column stars -->
+            <ng-container matColumnDef="checkIn">
+                <th mat-header-cell *matHeaderCellDef matTooltip="Check-In and Check-Out" matTooltipClass="yellow-back">
+                    Check-In <mat-icon>arrow_right_alt</mat-icon> Check-Out
+                </th>
+                <td mat-cell *matCellDef="let booking" class="w-30">
 
-        <!-- status column stars -->
-        <ng-container matColumnDef="status">
-            <th mat-header-cell *matHeaderCellDef matTooltip="Status of Payment" matTooltipClass="yellow-back">
-                Status
-            </th>
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <div>{{booking.checkIn | date: "mediumDate"}}</div>
+                        <mat-icon>arrow_right_alt</mat-icon>
+                        <div>{{booking.checkOut | date: "mediumDate"}}</div>
+                    </div>
+                </td>
+            </ng-container>
+            <!-- checkIn column ends -->
 
-            <td mat-cell *matCellDef="let booking" class="w-10">
-                {{booking.status}}
-            </td>
+            <!-- status column stars -->
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef matTooltip="Status of Payment" matTooltipClass="yellow-back">
+                    Status
+                </th>
 
-            <td mat-footer-cell *matFooterCellDef colspan="4">
-                {{rows.length}} bookings
-            </td>
+                <td mat-cell *matCellDef="let booking" class="w-10">
+                    {{booking.status}}
+                </td>
 
-        </ng-container>
-        <!-- status column ends -->
+                <td mat-footer-cell *matFooterCellDef colspan="4">
+                    {{rows.length}} bookings
+                </td>
 
-        <!-- roomType column stars -->
-        <ng-container matColumnDef="roomType">
-            <th mat-header-cell *matHeaderCellDef matTooltip="Room Type" matTooltipClass="yellow-back">
-                Room Type
-            </th>
-            <td mat-cell *matCellDef="let booking" class="w-25">
-                {{booking.roomType}}
-            </td>
-        </ng-container>
-        <!-- roomType column ends -->
+            </ng-container>
+            <!-- status column ends -->
 
-        <!-- phone column stars -->
-        <ng-container matColumnDef="phone">
-            <th mat-header-cell *matHeaderCellDef matTooltip="Phone" matTooltipClass="yellow-back">
-                Phone
-            </th>
-            <td mat-cell *matCellDef="let booking" class="w-15">
-                {{booking.phone}}
-            </td>
-        </ng-container>
-        <!-- phone column ends -->
+            <!-- roomType column stars -->
+            <ng-container matColumnDef="roomType">
+                <th mat-header-cell *matHeaderCellDef matTooltip="Room Type" matTooltipClass="yellow-back">
+                    Room Type
+                </th>
+                <td mat-cell *matCellDef="let booking" class="w-25">
+                    {{booking.roomType}}
+                </td>
+            </ng-container>
+            <!-- roomType column ends -->
 
-        <!-- actions column stars -->
-        <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef>
-                Actions
-            </th>
-            <td mat-cell *matCellDef="let booking" class="w-15">
-            </td>
-        </ng-container>
-        <!-- actions column ends -->
+            <!-- phone column stars -->
+            <ng-container matColumnDef="phone">
+                <th mat-header-cell *matHeaderCellDef matTooltip="Phone" matTooltipClass="yellow-back">
+                    Phone
+                </th>
+                <td mat-cell *matCellDef="let booking" class="w-15">
+                    {{booking.phone}}
+                </td>
+            </ng-container>
+            <!-- phone column ends -->
 
-        <!-- header row starts -->
-        <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true"
-            [ngClass]="{ 'hidden': !isLoadingCompleted}"></tr>
-        <!-- header row ends -->
+            <!-- actions column stars -->
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>
+                    Actions
+                </th>
+                <td mat-cell *matCellDef="let booking" class="w-15">
+                </td>
+            </ng-container>
+            <!-- actions column ends -->
 
-        <!-- data row starts -->
-        <tr mat-row *matRowDef="let booking; columns: columnsToDisplay"></tr>
-        <!-- data row ends -->
+            <!-- loadng column starts -->
+            <ng-container matColumnDef="loading">
+                <td mat-footer-cell *matFooterCellDef colspan="10" class="text-center text-italic">
+                    <div [ngClass]="{ 'hidden': isError}">
+                        <mat-spinner diameter="40" class="margin-auto"></mat-spinner>
+                    </div>
+                    <div class="text-center">{{bookingLoadingStatus}}</div>
+                </td>
+            </ng-container>
+            <!-- loadng column ends -->
 
-    </table>
-</div>
+            <!-- header row starts -->
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true"
+                [ngClass]="{ 'hidden': !isLoadingCompleted}"></tr>
+            <!-- header row ends -->
+
+            <!-- data row starts -->
+            <tr mat-row *matRowDef="let booking; columns: columnsToDisplay"></tr>
+            <!-- data row ends -->
+
+            <!-- footer row for loading starts -->
+            <tr mat-footer-row *matFooterRowDef="[ 'loading']" [ngClass]="{ 'hidden': isLoadingCompleted}"></tr>
+            <!-- footer row for loading ends -->
+
+        </table>
+    </div>
+</form>
