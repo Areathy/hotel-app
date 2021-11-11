@@ -119,6 +119,15 @@
             <tr mat-footer-row *matFooterRowDef="[ 'loading']" [ngClass]="{ 'hidden': isLoadingCompleted}"></tr>
             <!-- footer row for loading ends -->
 
+            <!-- grand footer row starts -->
+            <tr mat-footer-row *matFooterRowDef="[ 'customerName', 'status']; sticky: true"
+                class="text-italic font-weight-bold" [ngClass]="{ 'hidden': !isLoadingCompleted}"></tr>
+            <!-- grand footer row ends -->
+
         </table>
+    </div>
+
+    <div [ngClass]="{ 'hidden': !isLoadingCompleted}" class="table-paginator">
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" pageSize="5" showFirstLastButtons></mat-paginator>
     </div>
 </form>
