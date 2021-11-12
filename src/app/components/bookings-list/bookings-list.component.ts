@@ -3,6 +3,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { FormGroup, FormControl } from "@angular/forms";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
+import { SelectionModel } from "@angular/cdk/collections";
 
 import { Booking } from "../../models/booking";
 import { BookingsService } from "../../services/bookings.service";
@@ -14,7 +15,7 @@ import { BookingsService } from "../../services/bookings.service";
 })
 export class BookingsListComponent implements OnInit {
   bookings: MatTableDataSource<Booking> = null as any;
-  columnsToDisplay = ['customerName', 'checkIn', 'status', 'roomType', 'phone', 'actions'];
+  columnsToDisplay = ['select', 'customerName', 'checkIn', 'status', 'roomType', 'phone', 'actions'];
   bookingLoadingStatus: string = "Loading...";
   isLoadingCompleted: boolean = false;
   isError: boolean = false;
@@ -22,6 +23,8 @@ export class BookingsListComponent implements OnInit {
   formGroup!: FormGroup;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
+  selection: SelectionModel<Booking> = new SelectionModel<Booking>(true, []);
 
   constructor(private bookingsService: BookingsService) {
     this.formGroup = new FormGroup({
@@ -45,7 +48,7 @@ export class BookingsListComponent implements OnInit {
         //filterPredicate
         this.bookings.filterPredicate = (data, filter) => {
           return this.columnsToDisplay.some((column, i) => {
-            return column != "actions" && column != "selection" && (data as any)[column] && (data as any)[column]
+            return column != "actions" && column != "select" && (data as any)[column] && (data as any)[column]
               .toString().toLowerCase().indexOf(filter) != -1;
           })
         }
