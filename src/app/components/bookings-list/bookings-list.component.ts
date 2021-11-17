@@ -74,4 +74,26 @@ export class BookingsListComponent implements OnInit {
     this.filterBookings();
   }
 
+  //Returns true if all rows are selected; otherwise, false
+  isAllSelected() {
+    if (this.bookings) {
+      const numSelected = this.selection.selected.length;
+      const numRows = this.bookings.data.length;
+      return numSelected == numRows;
+    }
+    return this.bookings;
+  }
+
+  //Executes when the user checks / unchecks the master checkbox in the table
+  masterToggle() {
+    if (this.bookings) {
+      if (this.isAllSelected()) {
+        this.selection.clear();
+      }
+      else {
+        this.bookings.data.forEach(row => this.selection.select(row));
+      }
+    }
+  }
+
 }
