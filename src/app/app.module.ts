@@ -14,13 +14,15 @@ import { ChartModule } from "angular-highcharts";
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { BookingComponent } from './components/booking/booking.component';
 import { BookingsListComponent } from './components/bookings-list/bookings-list.component';
+import { BottomSheetMenuComponent } from './components/bottom-sheet-menu/bottom-sheet-menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     BookingComponent,
-    BookingsListComponent
+    BookingsListComponent,
+    BottomSheetMenuComponent
   ],
   imports: [
     BrowserModule,
