@@ -28,7 +28,7 @@
                     <mat-checkbox (change)="selection.toggle(row)" [checked]="selection.isSelected(row)"></mat-checkbox>
                 </td>
                 <td mat-footer-cell *matFooterCellDef colspan="2">
-                    <mat-icon matRipple class="hand-icon">menu</mat-icon>
+                    <mat-icon matRipple class="hand-icon" (click)="openBottomSheet()">menu</mat-icon>
                 </td>
             </ng-container>
             <!-- select column ends -->

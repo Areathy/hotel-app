@@ -4,9 +4,11 @@ import { FormGroup, FormControl } from "@angular/forms";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { SelectionModel } from "@angular/cdk/collections";
+import { MatBottomSheet } from "@angular/material/bottom-sheet";
 
 import { Booking } from "../../models/booking";
 import { BookingsService } from "../../services/bookings.service";
+import { BottomSheetMenuComponent } from '../bottom-sheet-menu/bottom-sheet-menu.component';
 
 @Component({
   selector: 'app-bookings-list',
@@ -26,7 +28,7 @@ export class BookingsListComponent implements OnInit {
 
   selection: SelectionModel<Booking> = new SelectionModel<Booking>(true, []);
 
-  constructor(private bookingsService: BookingsService) {
+  constructor(private bookingsService: BookingsService, private matBottomSheet: MatBottomSheet) {
     this.formGroup = new FormGroup({
       search: new FormControl(null)
     });
@@ -94,6 +96,11 @@ export class BookingsListComponent implements OnInit {
         this.bookings.data.forEach(row => this.selection.select(row));
       }
     }
+  }
+
+  //Executes when the user clicks on menu icon
+  openBottomSheet() {
+    this.matBottomSheet.open(BottomSheetMenuComponent);
   }
 
 }
