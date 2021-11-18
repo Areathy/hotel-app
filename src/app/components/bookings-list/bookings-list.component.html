@@ -59,6 +59,7 @@
                         <div>{{booking.checkIn | date: "mediumDate"}}</div>
                         <mat-icon>arrow_right_alt</mat-icon>
                         <div>{{booking.checkOut | date: "mediumDate"}}</div>
+                        <button mat-stroked-button color="primary" class="ml" (click)="onChangeDatesClick(booking)">Change</button>
                     </div>
                 </td>
             </ng-container>

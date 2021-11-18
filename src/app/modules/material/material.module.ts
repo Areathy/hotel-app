@@ -31,13 +31,14 @@ import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSortModule } from "@angular/material/sort";
 import { MatBottomSheetModule } from "@angular/material/bottom-sheet";
+import { MatDialogModule } from "@angular/material/dialog";
 
 let materialModules = [
   MatButtonModule, MatInputModule, MatToolbarModule, MatIconModule, MatMenuModule, MatExpansionModule, MatBadgeModule,
   MatDividerModule, MatTooltipModule, MatSidenavModule, MatListModule, MatRippleModule, MatGridListModule, MatProgressBarModule,
   MatStepperModule, MatAutocompleteModule, MatDatepickerModule, MatNativeDateModule, MatCardModule, MatButtonToggleModule,
   MatCheckboxModule, MatChipsModule, MatSlideToggleModule, MatRadioModule, MatSelectModule, MatTabsModule, MatTableModule,
-  MatPaginatorModule, MatProgressSpinnerModule, MatSortModule, MatBottomSheetModule
+  MatPaginatorModule, MatProgressSpinnerModule, MatSortModule, MatBottomSheetModule, MatDialogModule
 ];
 
 @NgModule({
