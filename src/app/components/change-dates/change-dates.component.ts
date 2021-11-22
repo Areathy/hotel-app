@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-change-dates',
@@ -7,7 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChangeDatesComponent implements OnInit {
 
-  constructor() { }
+  formGroup: FormGroup;
+
+  constructor() { 
+    this.formGroup = new FormGroup({
+      checkIn: new FormControl(null),
+      checkOut: new FormControl(null)
+    });
+  }
 
   ngOnInit(): void {
   }
