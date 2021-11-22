@@ -15,6 +15,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { BookingComponent } from './components/booking/booking.component';
 import { BookingsListComponent } from './components/bookings-list/bookings-list.component';
 import { BottomSheetMenuComponent } from './components/bottom-sheet-menu/bottom-sheet-menu.component';
+import { ChangeDatesComponent } from './components/change-dates/change-dates.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { BottomSheetMenuComponent } from './components/bottom-sheet-menu/bottom-
     DashboardComponent,
     BookingComponent,
     BookingsListComponent,
-    BottomSheetMenuComponent
+    BottomSheetMenuComponent,
+    ChangeDatesComponent
   ],
   imports: [
     BrowserModule,
