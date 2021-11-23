@@ -5,12 +5,12 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { SelectionModel } from "@angular/cdk/collections";
 import { MatBottomSheet } from "@angular/material/bottom-sheet";
-import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 
 import { Booking } from "../../models/booking";
 import { BookingsService } from "../../services/bookings.service";
 import { BottomSheetMenuComponent } from '../bottom-sheet-menu/bottom-sheet-menu.component';
 import { ChangeDatesComponent } from '../change-dates/change-dates.component';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-bookings-list',
@@ -30,7 +30,7 @@ export class BookingsListComponent implements OnInit {
 
   selection: SelectionModel<Booking> = new SelectionModel<Booking>(true, []);
 
-  constructor(private bookingsService: BookingsService, private matBottomSheet: MatBottomSheet, private matDialog: MatDialog) {
+  constructor(private bookingsService: BookingsService, private matBottomSheet: MatBottomSheet, private dialogService: DialogService) {
     this.formGroup = new FormGroup({
       search: new FormControl(null)
     });
@@ -107,7 +107,7 @@ export class BookingsListComponent implements OnInit {
 
   //Executes when the user clicks on "Change" button in the Check-In column
   onChangeDatesClick(booking:any) {
-    this.matDialog.open(ChangeDatesComponent);
+    this.dialogService.openDateChangerDialog();
   }
 
 }
