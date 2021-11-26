@@ -110,8 +110,18 @@ export class BookingsListComponent implements OnInit {
   onChangeDatesClick(booking:Booking) {
     let dialogRef: MatDialogRef<ChangeDatesComponent> = this.dialogService.openDateChangerDialog(booking);
 
-    dialogRef.afterClosed().subscribe((myDialogresult) => {
-      console.log(myDialogresult);
+    dialogRef.afterClosed().subscribe((myDialogResult) => {
+      if (myDialogResult && myDialogResult.data) {
+        this.rows = this.rows.map(booking => {
+          if (booking.id == myDialogResult.data.id) {
+            booking = { ...booking, checkIn: myDialogResult.data.checkIn, checkOut: myDialogResult.data.checkOut };
+          }
+
+          return booking;
+        });
+
+        this.bookings = new MatTableDataSource<Booking>(this.rows);
+      }
     });
   }
 
