@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Booking } from 'src/app/models/booking';
+import { BookingsService } from 'src/app/services/bookings.service';
 
 @Component({
   selector: 'app-change-dates',
@@ -12,7 +13,8 @@ export class ChangeDatesComponent implements OnInit {
 
   formGroup: FormGroup;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public dialogData: Booking, public matDialogRef: MatDialogRef<ChangeDatesComponent>) { 
+  constructor(@Inject(MAT_DIALOG_DATA) public dialogData: Booking, public matDialogRef: MatDialogRef<ChangeDatesComponent>,
+  private bookingsService: BookingsService) { 
     this.formGroup = new FormGroup({
       checkIn: new FormControl(null),
       checkOut: new FormControl(null)
@@ -30,6 +32,18 @@ export class ChangeDatesComponent implements OnInit {
   //Executes when the user clicks on Cancel / Close button
   onCancelClick() {
     this.matDialogRef.close();
+  }
+
+  onSaveClick() {
+    //send put request
+    this.bookingsService.putBooking({ ...this.dialogData, ...this.formGroup.value }).subscribe(
+      (response: Booking) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
 }

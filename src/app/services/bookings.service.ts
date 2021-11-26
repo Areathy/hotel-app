@@ -30,4 +30,8 @@ export class BookingsService {
   postBooking(booking: Booking): Observable<Booking> {
     return this.httpClient.post<Booking>(this.urlPrefix + `/bookings`, booking);
   }
+
+  putBooking(booking: Booking): Observable<Booking>{
+    return this.httpClient.put<Booking>(this.urlPrefix + `/bookings/${booking.id}`, booking);
+  }
 }
