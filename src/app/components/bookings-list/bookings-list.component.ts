@@ -110,8 +110,8 @@ export class BookingsListComponent implements OnInit {
   onChangeDatesClick(booking:Booking) {
     let dialogRef: MatDialogRef<ChangeDatesComponent> = this.dialogService.openDateChangerDialog(booking);
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
+    dialogRef.afterClosed().subscribe((myDialogresult) => {
+      console.log(myDialogresult);
     });
   }
 
