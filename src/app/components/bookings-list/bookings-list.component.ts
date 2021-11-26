@@ -106,8 +106,8 @@ export class BookingsListComponent implements OnInit {
   }
 
   //Executes when the user clicks on "Change" button in the Check-In column
-  onChangeDatesClick(booking:any) {
-    this.dialogService.openDateChangerDialog();
+  onChangeDatesClick(booking:Booking) {
+    this.dialogService.openDateChangerDialog(booking);
   }
 
 }
