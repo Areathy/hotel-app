@@ -11,6 +11,7 @@ import { BookingsService } from "../../services/bookings.service";
 import { BottomSheetMenuComponent } from '../bottom-sheet-menu/bottom-sheet-menu.component';
 import { ChangeDatesComponent } from '../change-dates/change-dates.component';
 import { DialogService } from 'src/app/services/dialog.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-bookings-list',
@@ -107,7 +108,11 @@ export class BookingsListComponent implements OnInit {
 
   //Executes when the user clicks on "Change" button in the Check-In column
   onChangeDatesClick(booking:Booking) {
-    this.dialogService.openDateChangerDialog(booking);
+    let dialogRef: MatDialogRef<ChangeDatesComponent> = this.dialogService.openDateChangerDialog(booking);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result);
+    });
   }
 
 }

@@ -38,7 +38,8 @@ export class ChangeDatesComponent implements OnInit {
     //send put request
     this.bookingsService.putBooking({ ...this.dialogData, ...this.formGroup.value }).subscribe(
       (response: Booking) => {
-        console.log(response);
+        //console.log(response);
+        this.matDialogRef.close({ result: "Saved", data: response });
       },
       (error) => {
         console.log(error);

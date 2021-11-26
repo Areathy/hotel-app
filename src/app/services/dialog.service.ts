@@ -18,6 +18,9 @@ export class DialogService {
     dialogConfig.width = "800px";
     dialogConfig.data = booking;
 
-    this.matDialog.open(ChangeDatesComponent, dialogConfig);
+    let dialogRef: MatDialogRef<ChangeDatesComponent> = this.matDialog.open(ChangeDatesComponent, dialogConfig);
+    //console.log(dialogRef);
+
+    return dialogRef;
   }
 }
