@@ -568,6 +568,13 @@ th.mat-header-cell:first-of-type,td.mat-cell:first-of-type,td.mat-footer-cell:fi
   margin-bottom: 15px;
 }
 
+.dialog-box
+{
+  border: 2px solid #065eb1;
+  border-top: 5px solid #065eb1;
+  border-radius: 6px;
+}
+
 @media screen and (max-width: 1000px)
 {
   /* styles for medium and small devices */

@@ -10,6 +10,12 @@ export class DialogService {
   constructor(private matDialog: MatDialog) { }
 
   openDateChangerDialog() {
-    this.matDialog.open(ChangeDatesComponent);
+
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.panelClass = "dialog-box";
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "800px";
+
+    this.matDialog.open(ChangeDatesComponent, dialogConfig);
   }
 }
