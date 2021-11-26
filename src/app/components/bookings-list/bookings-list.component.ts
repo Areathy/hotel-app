@@ -42,21 +42,7 @@ export class BookingsListComponent implements OnInit {
 
     this.bookingsService.getBookings().subscribe(
       (response: Booking[]) => {
-        this.bookings = new MatTableDataSource<Booking>(response);
-        this.rows = response;
-
-        this.isLoadingCompleted = true;
-
-        this.bookings.paginator = this.paginator;
-        this.bookings.sort = this.sort;
-
-        //filterPredicate
-        this.bookings.filterPredicate = (data, filter) => {
-          return this.columnsToDisplay.some((column, i) => {
-            return column != "actions" && column != "select" && (data as any)[column] && (data as any)[column]
-              .toString().toLowerCase().indexOf(filter) != -1;
-          })
-        }
+        this.createTableDataSource(response);
       },
       (error) => {
         console.log(error);
@@ -65,6 +51,24 @@ export class BookingsListComponent implements OnInit {
       },
     )
   }
+
+  createTableDataSource(elements: any) {
+    this.bookings = new MatTableDataSource<Booking>(elements);
+    this.rows = elements;
+    this.isLoadingCompleted = true;
+
+    this.bookings.paginator = this.paginator;
+    this.bookings.sort = this.sort;
+
+    //filterPredicate
+    this.bookings.filterPredicate = (data, filter) => {
+      return this.columnsToDisplay.some((column, i) => {
+        return column != "actions" && column != "select" && (data as any)[column] && (data as any)[column]
+        .toString().toLowerCase().indexOf(filter) != -1;
+      })
+    }
+  }
+
 
   //Executes when the user changes the value of search textbox
   filterBookings() {
@@ -120,8 +124,7 @@ export class BookingsListComponent implements OnInit {
           return booking;
         });
 
-        this.bookings = new MatTableDataSource<Booking>(this.rows);
-      }
+        this.createTableDataSource(this.rows);      }
     });
   }
 
