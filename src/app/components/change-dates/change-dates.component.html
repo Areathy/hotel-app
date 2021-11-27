@@ -10,7 +10,7 @@
         <!-- check in starts -->
         <mat-form-field class="w-100" color="primary">
           <mat-label>Check-In</mat-label>
-          <input type="text" matInput formControlName="checkIn" [matDatepicker]="checkInDatepicker" autocomplete="off">
+          <input type="text" matInput formControlName="checkIn" [matDatepicker]="checkInDatepicker" autocomplete="off" (dateChange)="onCheckInDateChange()">
   
           <mat-datepicker-toggle [for]="checkInDatepicker" matSuffix>
             <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>

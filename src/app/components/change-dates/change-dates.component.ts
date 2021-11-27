@@ -52,5 +52,17 @@ export class ChangeDatesComponent implements OnInit {
     );
   }
 
+  //Executes when the user changes the check-in date value
+  onCheckInDateChange() {
+    if (this.formGroup.value.checkIn)  {
+      let d: Date = new Date(this.formGroup.value.checkIn);
+      d.setDate(d.getDate() + 1);
+
+      this.formGroup.patchValue({
+        checkOut: d.toISOString()
+      });
+    }
+  }
+
 }
  
