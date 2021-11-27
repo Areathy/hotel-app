@@ -12,6 +12,7 @@ import { BookingsService } from 'src/app/services/bookings.service';
 export class ChangeDatesComponent implements OnInit {
 
   formGroup: FormGroup;
+  isWorking: boolean = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public dialogData: Booking, public matDialogRef: MatDialogRef<ChangeDatesComponent>,
   private bookingsService: BookingsService) { 
@@ -35,14 +36,18 @@ export class ChangeDatesComponent implements OnInit {
   }
 
   onSaveClick() {
+    this.isWorking = true;
+
     //send put request
     this.bookingsService.putBooking({ ...this.dialogData, ...this.formGroup.value }).subscribe(
       (response: Booking) => {
         //console.log(response);
         this.matDialogRef.close({ result: "Saved", data: response });
+        this.isWorking = false;
       },
       (error) => {
         console.log(error);
+        this.isWorking = false;
       }
     );
   }

@@ -39,6 +39,8 @@
           <mat-icon matPrefix class="mr">calendar_today</mat-icon>
         </mat-form-field>
         <!-- check out ends -->
+
+        <mat-progress-bar mode="indeterminate" [ngClass]="{ 'invisible': !isWorking}" class="mt"></mat-progress-bar>
   
         <div mat-dialog-actions class="mt mb" fxLayoutAlign="end center">
           <button mat-stroked-button color="warn" class="mr" (click)="onCancelClick()">Cancel</button>
