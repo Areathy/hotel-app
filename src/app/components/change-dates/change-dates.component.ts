@@ -17,7 +17,7 @@ export class ChangeDatesComponent implements OnInit {
   isWorking: boolean = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public dialogData: Booking, public matDialogRef: MatDialogRef<ChangeDatesComponent>,
-  private bookingsService: BookingsService, private matSnackBar: MatSnackBar) { 
+    private bookingsService: BookingsService, private matSnackBar: MatSnackBar) {
     this.formGroup = new FormGroup({
       checkIn: new FormControl(null),
       checkOut: new FormControl(null)
@@ -48,7 +48,12 @@ export class ChangeDatesComponent implements OnInit {
         this.isWorking = false;
 
         //notification
-        this.matSnackBar.open("Check-In and Check-Out dates updated", "close");
+        this.matSnackBar.open("Check-In and Check-Out dates updated", "close", {
+          duration: 4000,
+          horizontalPosition: "center",
+          verticalPosition: "top",
+          panelClass: "blue-back"
+        });
       },
       (error) => {
         console.log(error);
@@ -59,7 +64,7 @@ export class ChangeDatesComponent implements OnInit {
 
   //Executes when the user changes the check-in date value
   onCheckInDateChange() {
-    if (this.formGroup.value.checkIn)  {
+    if (this.formGroup.value.checkIn) {
       let d: Date = new Date(this.formGroup.value.checkIn);
       d.setDate(d.getDate() + 1);
 
@@ -70,4 +75,3 @@ export class ChangeDatesComponent implements OnInit {
   }
 
 }
- 
