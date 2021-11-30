@@ -1,10 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Booking } from 'src/app/models/booking';
 import { BookingsService } from 'src/app/services/bookings.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-change-dates',
@@ -17,7 +17,7 @@ export class ChangeDatesComponent implements OnInit {
   isWorking: boolean = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public dialogData: Booking, public matDialogRef: MatDialogRef<ChangeDatesComponent>,
-    private bookingsService: BookingsService, private matSnackBar: MatSnackBar) {
+    private bookingsService: BookingsService, private notificationService: NotificationService) {
     this.formGroup = new FormGroup({
       checkIn: new FormControl(null),
       checkOut: new FormControl(null)
@@ -48,12 +48,7 @@ export class ChangeDatesComponent implements OnInit {
         this.isWorking = false;
 
         //notification
-        this.matSnackBar.open("Check-In and Check-Out dates updated", "close", {
-          duration: 4000,
-          horizontalPosition: "center",
-          verticalPosition: "top",
-          panelClass: "blue-back"
-        });
+        this.notificationService.showNotification("Check-In and Check-Out dates updated", "OK");
       },
       (error) => {
         console.log(error);
