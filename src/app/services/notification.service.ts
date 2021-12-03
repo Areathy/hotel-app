@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NotificationsComponent } from '../components/notifications/notifications.component';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,11 @@ export class NotificationService {
 
   showNotification(message: string, buttonText: string) {
     //snackbar / notification
-    this.matSnackbar.open(message, buttonText, {
-      duration: 5000,
+    this.matSnackbar.openFromComponent(NotificationsComponent, {
+      duration: 15000,
       horizontalPosition: "center",
       verticalPosition: "top",
-      panelClass: "blue-back"
+      panelClass: "notification-panel "
     });
   }
 }
