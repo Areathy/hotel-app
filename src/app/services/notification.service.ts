@@ -15,7 +15,7 @@ export class NotificationService {
       duration: 15000,
       horizontalPosition: "center",
       verticalPosition: "top",
-      panelClass: "notification-panel "
+      panelClass: "notification-panel"
     });
   }
 }
