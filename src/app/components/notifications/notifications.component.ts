@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_SNACK_BAR_DATA } from "@angular/material/snack-bar";
 
 @Component({
@@ -8,9 +8,12 @@ import { MAT_SNACK_BAR_DATA } from "@angular/material/snack-bar";
 })
 export class NotificationsComponent implements OnInit {
 
-  constructor(@Inject(MAT_SNACK_BAR_DATA public data: any) { }
+  textCssClass: string = "";
+
+  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) { }
 
   ngOnInit(): void {
+    this.textCssClass = this.data.messageType == "success" ? 'text-green' : (this.data.messageType == "error" ? 'text-red' : 'text-black');
   }
 
 }

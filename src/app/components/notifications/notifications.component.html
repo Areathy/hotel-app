@@ -1,15 +1,15 @@
 <div class="notification-header text-black">
-    <span >Qwerty</span>
+    <span [ngClass]="textCssClass">Qwerty</span>
     <mat-icon class="float-right hand-icon text-black" matRipple >close</mat-icon>
   </div>
   
   <div class="notification-icon">
-    <mat-icon class="text-largest" >
+    <mat-icon class="text-largest" [ngClass]="textCssClass">
       success
     </mat-icon>
-  </div>
+  </div>x
   
-  <div class="notification-message" >message</div>
+  <div class="notification-message" [ngClass]="textCssClass">message</div>
   
   <div class="text-right mb p mr text-black">
     <button mat-stroked-button color="primary" >close</button>
