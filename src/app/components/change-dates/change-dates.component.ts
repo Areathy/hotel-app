@@ -48,11 +48,12 @@ export class ChangeDatesComponent implements OnInit {
         this.isWorking = false;
 
         //notification
-        this.notificationService.showNotification("Check-In and Check-Out dates updated", "OK");
+        this.notificationService.showNotification("Check-In and Check-Out dates updated", "OK", 'success');
       },
       (error) => {
         console.log(error);
         this.isWorking = false;
+        this.notificationService.showNotification("Unable to save dates", "Close", 'error');
       }
     );
   }
